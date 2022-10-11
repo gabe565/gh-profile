@@ -150,7 +150,7 @@ func promptProfile() (string, error) {
 		return "", err
 	}
 
-	profiles := make([]string, 0, len(files))
+	profiles := []string{"New Profile"}
 	for _, file := range files {
 		if file.IsDir() {
 			profiles = append(profiles, file.Name())
@@ -158,12 +158,22 @@ func promptProfile() (string, error) {
 	}
 
 	var profile string
+	var answer string
 	if err := survey.AskOne(&survey.Select{
 		Message: "Choose a profile",
 		Options: profiles,
-	}, &profile, survey.WithValidator(survey.Required)); err != nil {
+	}, &answer, survey.WithValidator(survey.Required)); err != nil {
 		return "", err
 	}
+
+	if answer == "New Profile" {
+		if err := survey.AskOne(&survey.Input{
+			Message: "Enter new profile name",
+		}, &answer, survey.WithValidator(survey.Required)); err != nil {
+			return "", err
+		}
+	}
+	profile = answer
 
 	return profile, nil
 }
