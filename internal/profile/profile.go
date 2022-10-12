@@ -71,9 +71,7 @@ func (p Profile) Activate() error {
 		return ErrProfileNotExist
 	}
 
-	if active, err := p.IsActive(); err != nil {
-		return err
-	} else if active {
+	if p.IsActive() {
 		return ErrProfileActive
 	}
 
@@ -92,19 +90,16 @@ func (p Profile) Activate() error {
 	return nil
 }
 
-func (p Profile) IsActive() (bool, error) {
+func (p Profile) IsActive() bool {
 	profileHosts, err := os.Lstat(p.HostsPath())
 	if err != nil {
-		return false, err
+		return false
 	}
 
 	hosts, err := os.Lstat(github.HostsPath())
 	if err != nil {
-		if errors.Is(err, os.ErrNotExist) {
-			return false, nil
-		}
-		return false, err
+		return false
 	}
 
-	return os.SameFile(hosts, profileHosts), nil
+	return os.SameFile(hosts, profileHosts)
 }
