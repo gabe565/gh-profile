@@ -3,7 +3,7 @@
 Deletes a profile
 
 ```
-profile delete name [flags]
+profile delete [name] [flags]
 ```
 
 ### Options
