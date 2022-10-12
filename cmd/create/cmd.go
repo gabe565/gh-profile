@@ -26,5 +26,9 @@ func run(cmd *cobra.Command, args []string) (err error) {
 		return err
 	}
 
-	return p.Create()
+	if err := p.Create(); err != nil {
+		return err
+	}
+
+	return p.Activate()
 }
