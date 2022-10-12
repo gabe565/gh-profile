@@ -20,7 +20,7 @@ type Profile struct {
 
 func (p Profile) Path() string {
 	conf := github.ConfigDir()
-	return filepath.Join(conf, "profiles", filepath.Join("/", p.Name))
+	return filepath.Join(conf, "profiles", filepath.Base(p.Name))
 }
 
 func (p Profile) HostsPath() string {
