@@ -11,7 +11,7 @@ import (
 func List() ([]Profile, error) {
 	conf := github.ConfigDir()
 
-	files, err := os.ReadDir(filepath.Join(conf, "accounts"))
+	files, err := os.ReadDir(filepath.Join(conf, "profiles"))
 	if err != nil {
 		return []Profile{}, err
 	}
