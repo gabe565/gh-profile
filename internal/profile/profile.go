@@ -27,7 +27,22 @@ func (p Profile) HostsPath() string {
 	return filepath.Join(p.Path(), github.HostsFilename)
 }
 
+func (p Profile) Exists() bool {
+	if _, err := os.Stat(p.Path()); err != nil {
+		return false
+	}
+	return true
+}
+
+var ErrProfileExist = errors.New("profile already exists")
+
 func (p Profile) Create() error {
+	if p.Exists() {
+		return ErrProfileExist
+	}
+
+	fmt.Println("Creating", p.Name)
+
 	// Create profile dir
 	if err := os.MkdirAll(p.Path(), 0755); err != nil {
 		return err
@@ -42,16 +57,24 @@ func (p Profile) Create() error {
 	return f.Close()
 }
 
-func (p Profile) Activate() error {
-	if _, err := os.Stat(p.Path()); err != nil {
-		if !errors.Is(err, os.ErrNotExist) {
-			return err
-		}
+func (p Profile) Delete() error {
+	fmt.Println("Deleting", p.Name)
+	return os.RemoveAll(p.Path())
+}
 
-		fmt.Println("Creating profile", p.Name)
-		if err := p.Create(); err != nil {
-			return err
-		}
+var ErrProfileNotExist = errors.New("profile does not exist")
+
+var ErrProfileActive = errors.New("profile already active")
+
+func (p Profile) Activate() error {
+	if !p.Exists() {
+		return ErrProfileNotExist
+	}
+
+	if active, err := p.IsActive(); err != nil {
+		return err
+	} else if active {
+		return ErrProfileActive
 	}
 
 	fmt.Println("Activating", p.Name)
@@ -67,4 +90,18 @@ func (p Profile) Activate() error {
 	}
 
 	return nil
+}
+
+func (p Profile) IsActive() (bool, error) {
+	profileHosts, err := os.Lstat(p.HostsPath())
+	if err != nil {
+		return false, err
+	}
+
+	hosts, err := os.Lstat(github.HostsPath())
+	if err != nil {
+		return false, err
+	}
+
+	return os.SameFile(hosts, profileHosts), nil
 }

@@ -1,8 +1,11 @@
 package cmd
 
 import (
+	"github.com/gabe565/gh-profile/cmd/create"
+	"github.com/gabe565/gh-profile/cmd/delete"
+	"github.com/gabe565/gh-profile/cmd/list"
+	"github.com/gabe565/gh-profile/cmd/switch"
 	"github.com/gabe565/gh-profile/internal/github"
-	"github.com/gabe565/gh-profile/internal/profile"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"os"
@@ -11,9 +14,8 @@ import (
 )
 
 var Command = &cobra.Command{
-	Use:     "profile [name]",
-	PreRunE: preRun,
-	RunE:    run,
+	Use:               "profile [name]",
+	PersistentPreRunE: preRun,
 }
 
 func preRun(cmd *cobra.Command, args []string) error {
@@ -26,28 +28,16 @@ func preRun(cmd *cobra.Command, args []string) error {
 		configDir = filepath.Join(home, strings.TrimPrefix(configDir, "$HOME"))
 		viper.Set(github.ConfigDirKey, configDir)
 	}
+
+	cmd.SilenceUsage = true
 	return nil
 }
 
-func run(cmd *cobra.Command, args []string) (err error) {
-	cmd.SilenceUsage = true
-
-	var p profile.Profile
-	if len(args) > 0 {
-		p = profile.New(args[0])
-	} else {
-		if p, err = profile.Prompt(); err != nil {
-			return err
-		}
-	}
-
-	if err := profile.ExistingToDefault(); err != nil {
-		return err
-	}
-
-	if err := p.Activate(); err != nil {
-		return err
-	}
-
-	return nil
+func init() {
+	Command.AddCommand(
+		create.Command,
+		_delete.Command,
+		list.Command,
+		_switch.Command,
+	)
 }
