@@ -6,7 +6,7 @@ import (
 )
 
 var Command = &cobra.Command{
-	Use:     "delete profile",
+	Use:     "delete name",
 	Aliases: []string{"remove", "rm", "d"},
 	Short:   "Deletes a profile",
 	RunE:    run,
