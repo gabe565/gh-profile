@@ -20,7 +20,11 @@ func run(cmd *cobra.Command, args []string) (err error) {
 	}
 
 	for _, p := range profiles {
-		fmt.Println(p)
+		if p.IsActive() {
+			fmt.Println("*", p.Name)
+		} else {
+			fmt.Println(" ", p.Name)
+		}
 	}
 
 	return nil
