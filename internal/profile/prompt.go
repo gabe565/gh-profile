@@ -60,3 +60,11 @@ func Prompt() (Profile, error) {
 
 	return Profile{}, ErrUnknownProfile
 }
+
+func PromptNew() (Profile, error) {
+	var answer string
+	err := survey.AskOne(&survey.Input{
+		Message: "Enter profile name:",
+	}, &answer, survey.WithValidator(survey.Required))
+	return New(answer), err
+}
