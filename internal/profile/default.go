@@ -31,8 +31,6 @@ func ExistingToDefault() error {
 		if err := os.Rename(github.HostsPath(), p.HostsPath()); err != nil {
 			return err
 		}
-
-		return p.Activate()
 	}
 
 	return nil
