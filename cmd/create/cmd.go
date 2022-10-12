@@ -7,7 +7,7 @@ import (
 
 var Command = &cobra.Command{
 	Use:     "create profile",
-	Aliases: []string{"new", "add"},
+	Aliases: []string{"c", "new", "add"},
 	Short:   "Creates a new profile",
 	RunE:    run,
 }

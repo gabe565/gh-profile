@@ -7,7 +7,7 @@ import (
 
 var Command = &cobra.Command{
 	Use:     "switch profile",
-	Aliases: []string{"activate", "active", "s"},
+	Aliases: []string{"activate", "active", "sw", "s"},
 	Short:   "Switch active profile",
 	RunE:    run,
 }
