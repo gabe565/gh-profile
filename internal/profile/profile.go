@@ -83,7 +83,7 @@ func (p Profile) Activate() error {
 	}
 
 	// Hardlink profile hosts config
-	if err := os.Link(p.HostsPath(), github.HostsPath()); err != nil {
+	if err := os.Symlink(p.HostsPath(), github.HostsPath()); err != nil {
 		return err
 	}
 
@@ -91,15 +91,10 @@ func (p Profile) Activate() error {
 }
 
 func (p Profile) IsActive() bool {
-	profileHosts, err := os.Lstat(p.HostsPath())
+	target, err := filepath.EvalSymlinks(github.HostsPath())
 	if err != nil {
 		return false
 	}
 
-	hosts, err := os.Lstat(github.HostsPath())
-	if err != nil {
-		return false
-	}
-
-	return os.SameFile(hosts, profileHosts)
+	return target == p.HostsPath()
 }

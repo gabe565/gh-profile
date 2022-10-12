@@ -1,9 +1,7 @@
 package util
 
 import (
-	"errors"
 	"os"
-	"syscall"
 )
 
 func IsLink(path string) (bool, error) {
@@ -16,10 +14,5 @@ func IsLink(path string) (bool, error) {
 		return true, nil
 	}
 
-	s, ok := fi.Sys().(*syscall.Stat_t)
-	if !ok {
-		return false, errors.New("cannot convert stat value to syscall.Stat_t")
-	}
-
-	return s.Nlink > 1, nil
+	return false, nil
 }
