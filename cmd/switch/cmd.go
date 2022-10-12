@@ -1,6 +1,8 @@
 package _switch
 
 import (
+	"errors"
+	"fmt"
 	"github.com/gabe565/gh-profile/internal/profile"
 	"github.com/spf13/cobra"
 )
@@ -27,6 +29,10 @@ func run(cmd *cobra.Command, args []string) (err error) {
 	}
 
 	if err := p.Activate(); err != nil {
+		if errors.Is(err, profile.ErrProfileActive) {
+			fmt.Println("⚠️ ", err)
+			return nil
+		}
 		return err
 	}
 
