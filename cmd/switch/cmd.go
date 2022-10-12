@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/gabe565/gh-profile/internal/profile"
+	"github.com/gabe565/gh-profile/internal/util"
 	"github.com/spf13/cobra"
 )
 
@@ -30,7 +31,7 @@ func run(cmd *cobra.Command, args []string) (err error) {
 
 	if err := p.Activate(); err != nil {
 		if errors.Is(err, profile.ErrProfileActive) {
-			fmt.Println("⚠️ ", err)
+			fmt.Println("⚠️ ", util.UpperFirst(err.Error()))
 			return nil
 		}
 		return err
