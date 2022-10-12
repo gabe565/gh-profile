@@ -100,6 +100,9 @@ func (p Profile) IsActive() (bool, error) {
 
 	hosts, err := os.Lstat(github.HostsPath())
 	if err != nil {
+		if errors.Is(err, os.ErrNotExist) {
+			return false, nil
+		}
 		return false, err
 	}
 
