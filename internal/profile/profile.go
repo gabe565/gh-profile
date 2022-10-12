@@ -41,7 +41,7 @@ func (p Profile) Create() error {
 		return ErrProfileExist
 	}
 
-	fmt.Println("Creating", p.Name)
+	fmt.Println("✨ Creating profile", p.Name)
 
 	// Create profile dir
 	if err := os.MkdirAll(p.Path(), 0755); err != nil {
@@ -58,7 +58,7 @@ func (p Profile) Create() error {
 }
 
 func (p Profile) Delete() error {
-	fmt.Println("Deleting", p.Name)
+	fmt.Println("🔥 Deleting profile", p.Name)
 	return os.RemoveAll(p.Path())
 }
 
@@ -75,7 +75,7 @@ func (p Profile) Activate() error {
 		return ErrProfileActive
 	}
 
-	fmt.Println("Activating", p.Name)
+	fmt.Println("🔧 Activating profile", p.Name)
 
 	// Remove existing hosts config
 	if err := os.Remove(github.HostsPath()); err != nil && !errors.Is(err, os.ErrNotExist) {

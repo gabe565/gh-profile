@@ -21,7 +21,7 @@ func ExistingToDefault() error {
 	}
 
 	if !isLink {
-		fmt.Println("Creating default profile")
+		fmt.Println("✨ Creating default profile")
 		p := Profile{Name: "default"}
 
 		if err := os.MkdirAll(p.Path(), 0755); err != nil {
