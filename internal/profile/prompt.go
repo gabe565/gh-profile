@@ -35,7 +35,11 @@ func Prompt() (Profile, error) {
 	}
 
 	profilesStr := make([]string, 0, len(profiles))
+	var defaultName string
 	for _, profile := range profiles {
+		if profile.IsActive() {
+			defaultName = profile.Name
+		}
 		profilesStr = append(profilesStr, profile.Name)
 	}
 
@@ -43,6 +47,7 @@ func Prompt() (Profile, error) {
 	if err := survey.AskOne(&survey.Select{
 		Message: "Choose a profile",
 		Options: profilesStr,
+		Default: defaultName,
 	}, &answer, survey.WithValidator(survey.Required)); err != nil {
 		return Profile{}, err
 	}
