@@ -1,6 +1,7 @@
 package _delete
 
 import (
+	"errors"
 	"github.com/gabe565/gh-profile/internal/profile"
 	"github.com/spf13/cobra"
 )
@@ -20,6 +21,10 @@ func run(cmd *cobra.Command, args []string) (err error) {
 		if p, err = profile.Prompt(); err != nil {
 			return err
 		}
+	}
+
+	if p.IsActive() {
+		return errors.New("refusing to delete the active profile. please switch profiles and try again")
 	}
 
 	return p.Delete()
