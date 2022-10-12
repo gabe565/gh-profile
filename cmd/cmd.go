@@ -17,6 +17,7 @@ var Command = &cobra.Command{
 	Use:               "profile",
 	Short:             "Work with multiple GitHub accounts using the gh cli",
 	PersistentPreRunE: preRun,
+	DisableAutoGenTag: true,
 }
 
 func preRun(cmd *cobra.Command, args []string) error {
