@@ -59,6 +59,11 @@ func (p Profile) Create() error {
 
 func (p Profile) Delete() error {
 	fmt.Println("🔥 Deleting profile", p.Name)
+
+	if !p.Exists() {
+		return ErrProfileNotExist
+	}
+
 	return os.RemoveAll(p.Path())
 }
 
