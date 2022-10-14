@@ -3,6 +3,7 @@ package list
 import (
 	"fmt"
 	"github.com/gabe565/gh-profile/internal/profile"
+	"github.com/jedib0t/go-pretty/v6/text"
 	"github.com/spf13/cobra"
 )
 
@@ -21,7 +22,7 @@ func run(cmd *cobra.Command, args []string) (err error) {
 
 	for _, p := range profiles {
 		if p.IsActive() {
-			fmt.Println("*", p.Name)
+			fmt.Println(text.FgGreen.Sprint("✓"), text.Bold.Sprint(p.Name))
 		} else {
 			fmt.Println(" ", p.Name)
 		}
