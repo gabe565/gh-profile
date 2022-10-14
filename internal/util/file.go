@@ -5,12 +5,12 @@ import (
 )
 
 func IsLink(path string) (bool, error) {
-	fi, err := os.Lstat(path)
+	f, err := os.Lstat(path)
 	if err != nil {
 		return false, err
 	}
 
-	if fi.Mode()&os.ModeSymlink != 0 {
+	if f.Mode()&os.ModeSymlink != 0 {
 		return true, nil
 	}
 
