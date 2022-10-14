@@ -3,5 +3,10 @@ package util
 import "unicode"
 
 func UpperFirst(s string) string {
-	return string(unicode.ToUpper(rune(s[0]))) + s[1:]
+	if len(s) == 0 {
+		return s
+	}
+	b := []rune(s)
+	b[0] = unicode.ToUpper(b[0])
+	return string(b)
 }
