@@ -57,8 +57,8 @@ func (p Profile) Create() error {
 	return f.Close()
 }
 
-func (p Profile) Delete() error {
-	fmt.Println("🔥 Deleting profile", p.Name)
+func (p Profile) Remove() error {
+	fmt.Println("🔥 Removing profile", p.Name)
 
 	if !p.Exists() {
 		return ErrProfileNotExist

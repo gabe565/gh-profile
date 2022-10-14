@@ -1,4 +1,4 @@
-package _delete
+package remove
 
 import (
 	"errors"
@@ -7,8 +7,8 @@ import (
 )
 
 var Command = &cobra.Command{
-	Use:     "delete [name]",
-	Aliases: []string{"remove", "rm", "d"},
+	Use:     "remove [name]",
+	Aliases: []string{"delete", "rm", "d"},
 	Short:   "Deletes a profile",
 	RunE:    run,
 }
@@ -18,14 +18,14 @@ func run(cmd *cobra.Command, args []string) (err error) {
 	if len(args) > 0 {
 		p = profile.New(args[0])
 	} else {
-		if p, err = profile.Select("Choose a profile to delete"); err != nil {
+		if p, err = profile.Select("Choose a profile to remove"); err != nil {
 			return err
 		}
 	}
 
 	if p.IsActive() {
-		return errors.New("refusing to delete the active profile. please switch profiles and try again")
+		return errors.New("refusing to remove the active profile. please switch profiles and try again")
 	}
 
-	return p.Delete()
+	return p.Remove()
 }

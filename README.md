@@ -19,7 +19,7 @@ gh extension install gabe565/gh-profile
 - `gh profile rename` - Prompts to rename a profile.
   - `gh profile rename example example2` - Renames a profile named example to example2.
 - `gh profile list` - Lists all profiles.
-- `gh profile delete` - Prompts to remove a profile.
-  - `gh profile delete example` - Deletes a profile named example.
+- `gh profile remove` - Prompts to remove a profile.
+  - `gh profile remove example` - Removes a profile named example.
 
 See [generated usage docs](./docs/profile.md) for more information.

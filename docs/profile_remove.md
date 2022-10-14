@@ -1,15 +1,15 @@
-## profile delete
+## profile remove
 
 Deletes a profile
 
 ```
-profile delete [name] [flags]
+profile remove [name] [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for delete
+  -h, --help   help for remove
 ```
 
 ### Options inherited from parent commands

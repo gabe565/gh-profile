@@ -12,8 +12,8 @@ Work with multiple GitHub accounts using the gh cli
 ### SEE ALSO
 
 * [profile create](profile_create.md)	 - Creates a new profile
-* [profile delete](profile_delete.md)	 - Deletes a profile
 * [profile list](profile_list.md)	 - Lists all profiles
+* [profile remove](profile_remove.md)	 - Deletes a profile
 * [profile rename](profile_rename.md)	 - Renames a profile
 * [profile switch](profile_switch.md)	 - Switch active profile
 

@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"github.com/gabe565/gh-profile/cmd/create"
-	"github.com/gabe565/gh-profile/cmd/delete"
 	"github.com/gabe565/gh-profile/cmd/list"
+	"github.com/gabe565/gh-profile/cmd/remove"
 	"github.com/gabe565/gh-profile/cmd/rename"
 	"github.com/gabe565/gh-profile/cmd/switch"
 	"github.com/gabe565/gh-profile/internal/github"
@@ -40,7 +40,7 @@ func preRun(cmd *cobra.Command, args []string) error {
 func init() {
 	Command.AddCommand(
 		create.Command,
-		_delete.Command,
+		remove.Command,
 		list.Command,
 		_switch.Command,
 		rename.Command,
