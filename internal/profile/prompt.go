@@ -28,7 +28,7 @@ func List() ([]Profile, error) {
 
 var ErrUnknownProfile = errors.New("unknown profile")
 
-func Prompt() (Profile, error) {
+func Select(message string) (Profile, error) {
 	profiles, err := List()
 	if err != nil {
 		return Profile{}, err
@@ -45,7 +45,7 @@ func Prompt() (Profile, error) {
 
 	var answer string
 	if err := survey.AskOne(&survey.Select{
-		Message: "Choose a profile",
+		Message: message,
 		Options: profilesStr,
 		Default: defaultName,
 	}, &answer, survey.WithValidator(survey.Required)); err != nil {
@@ -64,7 +64,7 @@ func Prompt() (Profile, error) {
 func PromptNew() (Profile, error) {
 	var answer string
 	err := survey.AskOne(&survey.Input{
-		Message: "Enter profile name:",
+		Message: "Enter new profile name:",
 	}, &answer, survey.WithValidator(survey.Required))
 	return New(answer), err
 }

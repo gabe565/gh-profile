@@ -20,7 +20,7 @@ func run(cmd *cobra.Command, args []string) (err error) {
 	if len(args) > 0 {
 		p = profile.New(args[0])
 	} else {
-		if p, err = profile.Prompt(); err != nil {
+		if p, err = profile.Select("Choose a profile to activate"); err != nil {
 			return err
 		}
 	}
