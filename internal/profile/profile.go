@@ -98,3 +98,30 @@ func (p Profile) IsActive() bool {
 
 	return target == p.HostsPath()
 }
+
+var ErrSameName = errors.New("name unchanged")
+
+func (p Profile) Rename(to string) error {
+	fmt.Println("🚚 Renaming", p.Name, "to", to)
+
+	if !p.Exists() {
+		return ErrProfileNotExist
+	}
+
+	if to == p.Name {
+		return ErrSameName
+	}
+
+	wasActive := p.IsActive()
+
+	oldPath := p.Path()
+	p.Name = to
+	if err := os.Rename(oldPath, p.Path()); err != nil {
+		return err
+	}
+
+	if wasActive {
+		return p.Activate()
+	}
+	return nil
+}

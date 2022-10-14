@@ -4,6 +4,7 @@ import (
 	"github.com/gabe565/gh-profile/cmd/create"
 	"github.com/gabe565/gh-profile/cmd/delete"
 	"github.com/gabe565/gh-profile/cmd/list"
+	"github.com/gabe565/gh-profile/cmd/rename"
 	"github.com/gabe565/gh-profile/cmd/switch"
 	"github.com/gabe565/gh-profile/internal/github"
 	"github.com/spf13/cobra"
@@ -42,5 +43,6 @@ func init() {
 		_delete.Command,
 		list.Command,
 		_switch.Command,
+		rename.Command,
 	)
 }
