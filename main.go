@@ -10,7 +10,7 @@ import (
 //go:generate go run ./internal/cmd/docs
 
 func main() {
-	if err := cmd.Command.Execute(); err != nil {
+	if err := cmd.New().Execute(); err != nil {
 		fmt.Println("🚫", util.UpperFirst(err.Error()))
 		os.Exit(1)
 	}

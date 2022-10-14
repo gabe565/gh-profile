@@ -5,11 +5,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var Command = &cobra.Command{
-	Use:     "create [name]",
-	Aliases: []string{"c", "new", "add"},
-	Short:   "Creates a new profile",
-	RunE:    run,
+func New() *cobra.Command {
+	return &cobra.Command{
+		Use:     "create [name]",
+		Aliases: []string{"c", "new", "add"},
+		Short:   "Creates a new profile",
+		RunE:    run,
+	}
 }
 
 func run(cmd *cobra.Command, args []string) (err error) {

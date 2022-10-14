@@ -8,11 +8,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var Command = &cobra.Command{
-	Use:     "switch [name]",
-	Aliases: []string{"activate", "active", "sw", "s"},
-	Short:   "Switch active profile",
-	RunE:    run,
+func New() *cobra.Command {
+	return &cobra.Command{
+		Use:     "switch [name]",
+		Aliases: []string{"activate", "active", "sw", "s"},
+		Short:   "Switch active profile",
+		RunE:    run,
+	}
 }
 
 func run(cmd *cobra.Command, args []string) (err error) {

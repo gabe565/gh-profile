@@ -14,12 +14,23 @@ import (
 	"strings"
 )
 
-var Command = &cobra.Command{
-	Use:               "profile",
-	Short:             "Work with multiple GitHub accounts using the gh cli",
-	PersistentPreRunE: preRun,
-	DisableAutoGenTag: true,
-	SilenceErrors:     true,
+func New() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:               "profile",
+		Short:             "Work with multiple GitHub accounts using the gh cli",
+		PersistentPreRunE: preRun,
+		DisableAutoGenTag: true,
+		SilenceErrors:     true,
+	}
+	cmd.AddCommand(
+		create.New(),
+		remove.New(),
+		list.New(),
+		_switch.New(),
+		rename.New(),
+	)
+	flagConfigDir(cmd)
+	return cmd
 }
 
 func preRun(cmd *cobra.Command, args []string) error {
@@ -35,14 +46,4 @@ func preRun(cmd *cobra.Command, args []string) error {
 
 	cmd.SilenceUsage = true
 	return nil
-}
-
-func init() {
-	Command.AddCommand(
-		create.Command,
-		remove.Command,
-		list.Command,
-		_switch.Command,
-		rename.Command,
-	)
 }

@@ -5,11 +5,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var Command = &cobra.Command{
-	Use:     "rename [name] [new-name]",
-	Aliases: []string{"mv"},
-	Short:   "Renames a profile",
-	RunE:    run,
+func New() *cobra.Command {
+	return &cobra.Command{
+		Use:     "rename [name] [new-name]",
+		Aliases: []string{"mv"},
+		Short:   "Renames a profile",
+		RunE:    run,
+	}
 }
 
 func run(cmd *cobra.Command, args []string) (err error) {

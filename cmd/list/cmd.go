@@ -7,11 +7,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var Command = &cobra.Command{
-	Use:     "list",
-	Aliases: []string{"ls", "l"},
-	Short:   "Lists all profiles",
-	RunE:    run,
+func New() *cobra.Command {
+	return &cobra.Command{
+		Use:     "list",
+		Aliases: []string{"ls", "l"},
+		Short:   "Lists all profiles",
+		RunE:    run,
+	}
 }
 
 func run(cmd *cobra.Command, args []string) (err error) {
