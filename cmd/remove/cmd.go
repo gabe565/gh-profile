@@ -8,7 +8,7 @@ import (
 
 func New() *cobra.Command {
 	return &cobra.Command{
-		Use:     "remove [name]",
+		Use:     "remove [NAME]",
 		Aliases: []string{"delete", "rm", "d"},
 		Short:   "Deletes a profile",
 		RunE:    run,

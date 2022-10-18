@@ -7,7 +7,7 @@ import (
 
 func New() *cobra.Command {
 	return &cobra.Command{
-		Use:     "rename [name] [new-name]",
+		Use:     "rename [NAME] [NEW_NAME]",
 		Aliases: []string{"mv"},
 		Short:   "Renames a profile",
 		RunE:    run,

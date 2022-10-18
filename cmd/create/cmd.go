@@ -7,7 +7,7 @@ import (
 
 func New() *cobra.Command {
 	return &cobra.Command{
-		Use:     "create [name]",
+		Use:     "create [NAME]",
 		Aliases: []string{"c", "new", "add"},
 		Short:   "Creates a new profile",
 		RunE:    run,

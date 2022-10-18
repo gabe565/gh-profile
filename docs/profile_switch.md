@@ -3,7 +3,7 @@
 Switch active profile
 
 ```
-profile switch [name] [flags]
+profile switch [NAME] [flags]
 ```
 
 ### Options

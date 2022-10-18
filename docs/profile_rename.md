@@ -3,7 +3,7 @@
 Renames a profile
 
 ```
-profile rename [name] [new-name] [flags]
+profile rename [NAME] [NEW_NAME] [flags]
 ```
 
 ### Options

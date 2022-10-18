@@ -3,7 +3,7 @@
 Creates a new profile
 
 ```
-profile create [name] [flags]
+profile create [NAME] [flags]
 ```
 
 ### Options
