@@ -5,6 +5,7 @@ import (
 	"github.com/gabe565/gh-profile/cmd/list"
 	"github.com/gabe565/gh-profile/cmd/remove"
 	"github.com/gabe565/gh-profile/cmd/rename"
+	"github.com/gabe565/gh-profile/cmd/show"
 	"github.com/gabe565/gh-profile/cmd/switch"
 	"github.com/gabe565/gh-profile/internal/github"
 	"github.com/spf13/cobra"
@@ -28,6 +29,7 @@ func New() *cobra.Command {
 		list.New(),
 		_switch.New(),
 		rename.New(),
+		show.New(),
 	)
 	flagConfigDir(cmd)
 	return cmd
