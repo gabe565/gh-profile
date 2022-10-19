@@ -15,32 +15,41 @@ gh extension install gabe565/gh-profile
 See the [generated usage docs](./docs/profile.md), or see a summary of each
 subcommand below.
 
+
 ### `gh profile create [NAME]`
-Creates a new profile called `name`.  
-Name is optional. If not set, command will run interactively.  
-Aliases: `new`, `add`
+Creates a new profile.
+
+#### Params
+- `NAME` is optional. If not set, command will run interactively.
+
 
 ### `gh profile switch [NAME] [--local-dir]`
-Activates the profile called `name`.  
-Name is optional. If not set, command will run interactively.  
-If the `--local-dir` flag is added, the profile will only be activated in the
-current directory. For this to work, you must install a per-directory
-env tool like [direnv](https://direnv.net).  
-Aliases: `activate`, `active`, `sw`
+Activates a profile.
+
+#### Params
+- `NAME` is optional. If not set, command will run interactively.
+- `--local-dir` activates the profile only for the current directory.
+  - For this to work, you must install a per-directory env tool like
+  [direnv](https://direnv.net).
+
 
 ### `gh profile rename [NAME] [NEW_NAME]`
-Renames a profile called `old` to `new`.  
-Old and new name are optional. If not set, command will run interactively.  
-Aliases: `mv`
+Renames a profile.
+
+#### Params
+- `NAME` and `NEW_NAME` are optional. If not set, command will run interactively.
+
 
 ### `gh profile list`
 Lists all profiles. Active profile will be bold with a green check.  
-Aliases: `ls`, `l`
+
 
 ### `gh profile remove [NAME]`
-Removes a profile called `name`.  
-Name is optional. If not set, command will run interactively.  
-Aliases: `delete`, `rm`
+Removes a profile.
+
+#### Params
+- `NAME` is optional. If not set, command will run interactively.
+
 
 ### `gh profile show`
 Prints the active profile name. If no profile is active, will print `none`.
