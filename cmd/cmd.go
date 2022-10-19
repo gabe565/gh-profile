@@ -9,7 +9,6 @@ import (
 	"github.com/gabe565/gh-profile/cmd/switch"
 	"github.com/gabe565/gh-profile/internal/github"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 	"os"
 	"path/filepath"
 	"strings"
@@ -43,7 +42,7 @@ func preRun(cmd *cobra.Command, args []string) error {
 		}
 
 		configDir = filepath.Join(home, strings.TrimPrefix(configDir, "$HOME"))
-		viper.Set(github.ConfigDirKey, configDir)
+		github.SetConfigDir(configDir)
 	}
 
 	cmd.SilenceUsage = true
