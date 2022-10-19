@@ -34,9 +34,9 @@ func run(cmd *cobra.Command, args []string) (err error) {
 	}
 
 	if inLocalDir {
-		err = p.ActivateLocally()
+		err = p.ActivateLocally(false)
 	} else {
-		err = p.ActivateGlobally()
+		err = p.ActivateGlobally(false)
 	}
 	if err != nil {
 		if errors.Is(err, profile.ErrProfileActive) {

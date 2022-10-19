@@ -6,13 +6,10 @@ import (
 	"github.com/gabe565/gh-profile/internal/github"
 	"github.com/gabe565/gh-profile/internal/util"
 	"os"
-	"path/filepath"
 )
 
 func ExistingToDefault() error {
-	conf := github.RootConfigDir()
-
-	isLink, err := util.IsLink(filepath.Join(conf, "hosts.yml"))
+	isLink, err := util.IsLink(github.RootHostsPath())
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
 			return nil
@@ -29,6 +26,10 @@ func ExistingToDefault() error {
 		}
 
 		if err := os.Rename(github.RootHostsPath(), p.HostsPath()); err != nil {
+			return err
+		}
+
+		if err := os.Rename(github.RootConfigPath(), p.ConfigPath()); err != nil {
 			return err
 		}
 	}

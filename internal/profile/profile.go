@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/gabe565/gh-profile/internal/github"
+	"github.com/gabe565/gh-profile/internal/util"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -28,6 +29,10 @@ func (p Profile) HostsPath() string {
 	return filepath.Join(p.Path(), github.HostsFilename)
 }
 
+func (p Profile) ConfigPath() string {
+	return filepath.Join(p.Path(), github.ConfigFilename)
+}
+
 func (p Profile) Exists() bool {
 	if _, err := os.Stat(p.Path()); err != nil {
 		return false
@@ -49,13 +54,17 @@ func (p Profile) Create() error {
 		return err
 	}
 
-	// Create profile hosts config
-	f, err := os.OpenFile(filepath.Join(p.Path(), "hosts.yml"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
+	// Create profile hosts
+	if err := util.CopyFile(github.RootHostsPath(), p.HostsPath()); err != nil && !errors.Is(err, os.ErrNotExist) {
 		return err
 	}
 
-	return f.Close()
+	// Create profile config
+	if err := util.CopyFile(github.RootConfigPath(), p.ConfigPath()); err != nil && !errors.Is(err, os.ErrNotExist) {
+		return err
+	}
+
+	return nil
 }
 
 func (p Profile) Remove() error {
@@ -72,7 +81,7 @@ var ErrProfileNotExist = errors.New("profile does not exist")
 
 var ErrProfileActive = errors.New("profile already active")
 
-func (p Profile) ActivateLocally() error {
+func (p Profile) ActivateLocally(force bool) error {
 	if !p.Exists() {
 		return ErrProfileNotExist
 	}
@@ -83,7 +92,7 @@ func (p Profile) ActivateLocally() error {
 		fmt.Println("⚠️  direnv not found. To use local dir profiles, please see https://direnv.net")
 	}
 
-	if p.IsActiveLocally() {
+	if p.IsActiveLocally() && !force {
 		return ErrProfileActive
 	}
 
@@ -102,24 +111,47 @@ func (p Profile) ActivateLocally() error {
 	return f.Close()
 }
 
-func (p Profile) ActivateGlobally() error {
+func (p Profile) ActivateGlobally(force bool) error {
 	if !p.Exists() {
 		return ErrProfileNotExist
 	}
 
 	fmt.Println("🔧 Activating global profile", p.Name)
 
-	if p.IsActiveGlobally() {
+	if p.IsActiveGlobally() && !force {
 		return ErrProfileActive
 	}
 
-	// Remove existing hosts config
+	// Remove existing hosts
 	if err := os.Remove(github.RootHostsPath()); err != nil && !errors.Is(err, os.ErrNotExist) {
 		return err
 	}
 
-	// Hardlink profile hosts config
-	return os.Symlink(p.HostsPath(), github.RootHostsPath())
+	// Symlink profile hosts
+	if err := os.Symlink(p.HostsPath(), github.RootHostsPath()); err != nil {
+		return err
+	}
+
+	// Copy config to profile if not exist
+	if _, err := os.Stat(p.ConfigPath()); errors.Is(err, os.ErrNotExist) {
+		if err := util.CopyFile(github.RootConfigPath(), p.ConfigPath()); err != nil {
+			if !errors.Is(err, os.ErrNotExist) {
+				return err
+			}
+		}
+	}
+
+	// Remove existing config
+	if err := os.Remove(github.RootConfigPath()); err != nil && !errors.Is(err, os.ErrNotExist) {
+		return err
+	}
+
+	// Symlink profile config
+	if err := os.Symlink(p.ConfigPath(), github.RootConfigPath()); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (p Profile) Status() ActiveStatus {
@@ -172,7 +204,7 @@ func (p Profile) Rename(to string) error {
 	}
 
 	if wasActive {
-		return p.ActivateGlobally()
+		return p.ActivateGlobally(false)
 	}
 
 	return nil
