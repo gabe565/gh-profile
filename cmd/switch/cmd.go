@@ -29,10 +29,6 @@ func run(cmd *cobra.Command, args []string) (err error) {
 		}
 	}
 
-	if err := profile.ExistingToDefault(); err != nil {
-		return err
-	}
-
 	if inLocalDir {
 		err = p.ActivateLocally(false)
 	} else {
