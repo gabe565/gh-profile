@@ -25,7 +25,7 @@ func run(cmd *cobra.Command, args []string) (err error) {
 		}
 	}
 
-	if p.IsActive() {
+	if p.Status().IsAnyActive() {
 		return errors.New("refusing to remove the active profile. please switch profiles and try again")
 	}
 

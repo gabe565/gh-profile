@@ -32,5 +32,5 @@ func run(cmd *cobra.Command, args []string) (err error) {
 		return err
 	}
 
-	return p.Activate()
+	return p.ActivateGlobally()
 }

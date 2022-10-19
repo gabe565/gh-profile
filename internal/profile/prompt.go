@@ -16,7 +16,7 @@ func Select(message string) (Profile, error) {
 	profilesStr := make([]string, 0, len(profiles))
 	var defaultName string
 	for _, profile := range profiles {
-		if profile.IsActive() {
+		if profile.Status().IsAnyActive() {
 			defaultName = profile.Name
 		}
 		profilesStr = append(profilesStr, profile.Name)

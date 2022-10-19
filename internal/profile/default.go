@@ -10,7 +10,7 @@ import (
 )
 
 func ExistingToDefault() error {
-	conf := github.ConfigDir()
+	conf := github.RootConfigDir()
 
 	isLink, err := util.IsLink(filepath.Join(conf, "hosts.yml"))
 	if err != nil {
@@ -28,7 +28,7 @@ func ExistingToDefault() error {
 			return err
 		}
 
-		if err := os.Rename(github.HostsPath(), p.HostsPath()); err != nil {
+		if err := os.Rename(github.RootHostsPath(), p.HostsPath()); err != nil {
 			return err
 		}
 	}

@@ -35,7 +35,8 @@ func New() *cobra.Command {
 }
 
 func preRun(cmd *cobra.Command, args []string) error {
-	if configDir := github.ConfigDir(); strings.HasPrefix(configDir, "$HOME"+string(os.PathSeparator)) {
+	configDir := github.ConfigDir()
+	if strings.HasPrefix(configDir, "$HOME"+string(os.PathSeparator)) {
 		home, err := os.UserHomeDir()
 		if err != nil {
 			return err
@@ -43,6 +44,12 @@ func preRun(cmd *cobra.Command, args []string) error {
 
 		configDir = filepath.Join(home, strings.TrimPrefix(configDir, "$HOME"))
 		github.SetConfigDir(configDir)
+	}
+
+	if dir := filepath.Dir(configDir); filepath.Base(dir) == "profiles" {
+		github.SetRootConfigDir(filepath.Dir(dir))
+	} else {
+		github.SetRootConfigDir(configDir)
 	}
 
 	cmd.SilenceUsage = true

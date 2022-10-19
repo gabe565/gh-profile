@@ -20,9 +20,12 @@ Creates a new profile called `name`.
 Name is optional. If not set, command will run interactively.  
 Aliases: `new`, `add`
 
-### `gh profile switch [NAME]`
+### `gh profile switch [NAME] [--local-dir]`
 Activates the profile called `name`.  
 Name is optional. If not set, command will run interactively.  
+If the `--local-dir` flag is added, the profile will only be activated in the
+current directory. For this to work, you must install a per-directory
+env tool like [direnv](https://direnv.net).  
 Aliases: `activate`, `active`, `sw`
 
 ### `gh profile rename [NAME] [NEW_NAME]`

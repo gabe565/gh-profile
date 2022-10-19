@@ -9,7 +9,8 @@ profile switch [NAME] [flags]
 ### Options
 
 ```
-  -h, --help   help for switch
+  -h, --help        help for switch
+  -l, --local-dir   Enables the profile for the current directory using direnv.
 ```
 
 ### Options inherited from parent commands

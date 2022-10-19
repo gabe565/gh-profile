@@ -7,7 +7,7 @@ import (
 )
 
 func List() ([]Profile, error) {
-	conf := github.ConfigDir()
+	conf := github.RootConfigDir()
 
 	files, err := os.ReadDir(filepath.Join(conf, "profiles"))
 	if err != nil {

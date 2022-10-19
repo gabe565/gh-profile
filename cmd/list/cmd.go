@@ -23,7 +23,7 @@ func run(cmd *cobra.Command, args []string) (err error) {
 	}
 
 	for _, p := range profiles {
-		if p.IsActive() {
+		if p.Status().IsActive() {
 			fmt.Println(text.FgGreen.Sprint("✓"), text.Bold.Sprint(p.Name))
 		} else {
 			fmt.Println(" ", p.Name)

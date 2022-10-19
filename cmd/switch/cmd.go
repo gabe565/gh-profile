@@ -9,12 +9,14 @@ import (
 )
 
 func New() *cobra.Command {
-	return &cobra.Command{
+	cmd := &cobra.Command{
 		Use:     "switch [NAME]",
 		Aliases: []string{"activate", "active", "sw", "s"},
 		Short:   "Switch active profile",
 		RunE:    run,
 	}
+	flagLocalDir(cmd)
+	return cmd
 }
 
 func run(cmd *cobra.Command, args []string) (err error) {
@@ -31,7 +33,12 @@ func run(cmd *cobra.Command, args []string) (err error) {
 		return err
 	}
 
-	if err := p.Activate(); err != nil {
+	if inLocalDir {
+		err = p.ActivateLocally()
+	} else {
+		err = p.ActivateGlobally()
+	}
+	if err != nil {
 		if errors.Is(err, profile.ErrProfileActive) {
 			fmt.Println("⚠️ ", util.UpperFirst(err.Error()))
 			return nil
