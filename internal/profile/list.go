@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 )
 
-var ErrNoProfiles = errors.New("no profiles found")
+var ErrNoneFound = errors.New("no profiles found")
 
 func List() ([]Profile, error) {
 	conf := github.RootConfigDir()
@@ -15,7 +15,7 @@ func List() ([]Profile, error) {
 	files, err := os.ReadDir(filepath.Join(conf, "profiles"))
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			err = ErrNoProfiles
+			err = ErrNoneFound
 		}
 		return []Profile{}, err
 	}

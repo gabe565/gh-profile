@@ -16,6 +16,14 @@ func New(name string) Profile {
 	}
 }
 
+var ErrExist = errors.New("profile already exists")
+
+var ErrNotExist = errors.New("profile does not exist")
+
+var ErrActive = errors.New("profile already active")
+
+var ErrNameUnchanged = errors.New("name unchanged")
+
 type Profile struct {
 	Name string
 }
@@ -40,11 +48,9 @@ func (p Profile) Exists() bool {
 	return true
 }
 
-var ErrProfileExist = errors.New("profile already exists")
-
 func (p Profile) Create() error {
 	if p.Exists() {
-		return fmt.Errorf("%w: %s", ErrProfileExist, p.Name)
+		return fmt.Errorf("%w: %s", ErrExist, p.Name)
 	}
 
 	fmt.Println("✨ Creating profile", p.Name)
@@ -69,7 +75,7 @@ func (p Profile) Create() error {
 
 func (p Profile) Remove() error {
 	if !p.Exists() {
-		return fmt.Errorf("%w: %s", ErrProfileNotExist, p.Name)
+		return fmt.Errorf("%w: %s", ErrNotExist, p.Name)
 	}
 
 	fmt.Println("🔥 Removing profile", p.Name)
@@ -77,13 +83,9 @@ func (p Profile) Remove() error {
 	return os.RemoveAll(p.Path())
 }
 
-var ErrProfileNotExist = errors.New("profile does not exist")
-
-var ErrProfileActive = errors.New("profile already active")
-
 func (p Profile) ActivateLocally(force bool) error {
 	if !p.Exists() {
-		return fmt.Errorf("%w: %s", ErrProfileNotExist, p.Name)
+		return fmt.Errorf("%w: %s", ErrNotExist, p.Name)
 	}
 
 	fmt.Println("🔧 Activating local dir profile", p.Name)
@@ -93,7 +95,7 @@ func (p Profile) ActivateLocally(force bool) error {
 	}
 
 	if p.IsActiveLocally() && !force {
-		return fmt.Errorf("%w: %s", ErrProfileActive, p.Name)
+		return fmt.Errorf("%w: %s", ErrActive, p.Name)
 	}
 
 	f, err := os.OpenFile(".envrc", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
@@ -113,13 +115,13 @@ func (p Profile) ActivateLocally(force bool) error {
 
 func (p Profile) ActivateGlobally(force bool) error {
 	if !p.Exists() {
-		return fmt.Errorf("%w: %s", ErrProfileNotExist, p.Name)
+		return fmt.Errorf("%w: %s", ErrNotExist, p.Name)
 	}
 
 	fmt.Println("🔧 Activating global profile", p.Name)
 
 	if p.IsActiveGlobally() && !force {
-		return fmt.Errorf("%w: %s", ErrProfileActive, p.Name)
+		return fmt.Errorf("%w: %s", ErrActive, p.Name)
 	}
 
 	// Remove existing hosts
@@ -182,17 +184,15 @@ func (p Profile) IsActiveLocally() bool {
 	return false
 }
 
-var ErrSameName = errors.New("name unchanged")
-
 func (p Profile) Rename(to string) error {
 	if !p.Exists() {
-		return fmt.Errorf("%w: %s", ErrProfileNotExist, p.Name)
+		return fmt.Errorf("%w: %s", ErrNotExist, p.Name)
 	}
 
 	fmt.Println("🚚 Renaming", p.Name, "to", to)
 
 	if to == p.Name {
-		return fmt.Errorf("%w: %s to %s", ErrSameName, p.Name, to)
+		return fmt.Errorf("%w: %s to %s", ErrNameUnchanged, p.Name, to)
 	}
 
 	wasActive := p.IsActiveGlobally()

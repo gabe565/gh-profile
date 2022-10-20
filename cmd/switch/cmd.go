@@ -35,7 +35,7 @@ func run(cmd *cobra.Command, args []string) (err error) {
 		err = p.ActivateGlobally(false)
 	}
 	if err != nil {
-		if errors.Is(err, profile.ErrProfileActive) {
+		if errors.Is(err, profile.ErrActive) {
 			fmt.Println("⚠️ ", util.UpperFirst(err.Error()))
 			return nil
 		}
