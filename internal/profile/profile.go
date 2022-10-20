@@ -103,6 +103,15 @@ func (p Profile) ActivateLocally(force bool) error {
 		return fmt.Errorf("%w: %s", ErrActive, p.Name)
 	}
 
+	// Copy config to profile if not exist
+	if _, err := os.Stat(p.ConfigPath()); errors.Is(err, os.ErrNotExist) {
+		if err := util.CopyFile(github.RootConfigPath(), p.ConfigPath()); err != nil {
+			if !errors.Is(err, os.ErrNotExist) {
+				return err
+			}
+		}
+	}
+
 	f, err := os.OpenFile(".envrc", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 	if err != nil {
 		return err
