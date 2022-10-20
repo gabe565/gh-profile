@@ -97,8 +97,6 @@ func (p Profile) ActivateLocally(force bool) error {
 		return fmt.Errorf("%w: %s", ErrNotExist, p.Name)
 	}
 
-	fmt.Println("🔧 Activating local dir profile:", p.Name)
-
 	if _, err := exec.LookPath("direnv"); err != nil {
 		fmt.Println("⚠️  direnv not found. To use local dir profiles, please see https://direnv.net")
 	}
@@ -106,6 +104,8 @@ func (p Profile) ActivateLocally(force bool) error {
 	if p.IsActiveLocally() && !force {
 		return fmt.Errorf("%w: %s", ErrActive, p.Name)
 	}
+
+	fmt.Println("🔧 Activating local dir profile:", p.Name)
 
 	// Copy config to profile if not exist
 	if _, err := os.Stat(p.ConfigPath()); errors.Is(err, os.ErrNotExist) {
