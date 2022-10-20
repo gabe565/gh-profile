@@ -112,7 +112,7 @@ func (p Profile) ActivateLocally(force bool) error {
 		}
 	}
 
-	f, err := os.OpenFile(".envrc", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
+	f, err := os.OpenFile(".envrc", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
 	if err != nil {
 		return err
 	}
