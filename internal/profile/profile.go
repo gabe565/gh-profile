@@ -127,6 +127,10 @@ func (p Profile) ActivateGlobally(force bool) error {
 		return fmt.Errorf("%w: %s", ErrActive, p.Name)
 	}
 
+	if github.ConfigDirOverridden() {
+		fmt.Println("ℹ️  Found local dir profile, but global change was requested")
+	}
+
 	fmt.Println("🔧 Activating global profile:", p.Name)
 
 	// Remove existing hosts
