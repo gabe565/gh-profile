@@ -1,13 +1,17 @@
 package profile
 
 import (
+	"bufio"
+	"bytes"
 	"errors"
 	"fmt"
 	"github.com/gabe565/gh-profile/internal/github"
 	"github.com/gabe565/gh-profile/internal/util"
+	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 )
 
 func New(name string) Profile {
@@ -112,7 +116,7 @@ func (p Profile) ActivateLocally(force bool) error {
 		}
 	}
 
-	f, err := os.OpenFile(".envrc", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
+	f, err := os.OpenFile(".envrc", os.O_CREATE|os.O_RDWR, 0666)
 	if err != nil {
 		return err
 	}
@@ -120,7 +124,42 @@ func (p Profile) ActivateLocally(force bool) error {
 		_ = f.Close()
 	}(f)
 
-	if _, err := f.WriteString("export GH_CONFIG_DIR=\"" + util.ReplaceEnvsInPath(p.Path()) + "\"\n"); err != nil {
+	envPrefix := "export GH_CONFIG_DIR="
+	envLine := envPrefix + `"` + util.ReplaceEnvsInPath(p.Path()) + `"`
+
+	var buf bytes.Buffer
+	scanner := bufio.NewScanner(f)
+	var found bool
+	for scanner.Scan() {
+		line := scanner.Text()
+		if strings.HasPrefix(line, envPrefix) {
+			if found {
+				continue
+			} else {
+				line = envLine
+				found = true
+			}
+		}
+		if _, err := buf.WriteString(line + "\n"); err != nil {
+			return err
+		}
+	}
+	if scanner.Err() != nil {
+		return scanner.Err()
+	}
+
+	if !found {
+		buf.WriteString(envLine + "\n")
+	}
+
+	if _, err := f.Seek(0, io.SeekStart); err != nil {
+		return err
+	}
+	if err := f.Truncate(0); err != nil {
+		return err
+	}
+
+	if _, err := io.Copy(f, &buf); err != nil {
 		return err
 	}
 
