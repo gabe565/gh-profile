@@ -2,17 +2,13 @@ package profile
 
 import (
 	"errors"
-	"github.com/gabe565/gh-profile/internal/github"
 	"os"
-	"path/filepath"
 )
 
 var ErrNoneFound = errors.New("no profiles found")
 
 func List() ([]Profile, error) {
-	conf := github.RootConfigDir()
-
-	files, err := os.ReadDir(filepath.Join(conf, "profiles"))
+	files, err := os.ReadDir(ConfigDir())
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
 			err = ErrNoneFound

@@ -24,13 +24,18 @@ var ErrActive = errors.New("profile already active")
 
 var ErrNameUnchanged = errors.New("name unchanged")
 
+var ConfigDirName = "profiles"
+
+func ConfigDir() string {
+	return filepath.Join(github.RootConfigDir(), ConfigDirName)
+}
+
 type Profile struct {
 	Name string
 }
 
 func (p Profile) Path() string {
-	conf := github.RootConfigDir()
-	return filepath.Join(conf, "profiles", filepath.Base(p.Name))
+	return filepath.Join(ConfigDir(), filepath.Base(p.Name))
 }
 
 func (p Profile) HostsPath() string {

@@ -8,6 +8,7 @@ import (
 	"github.com/gabe565/gh-profile/cmd/show"
 	"github.com/gabe565/gh-profile/cmd/switch"
 	"github.com/gabe565/gh-profile/internal/github"
+	"github.com/gabe565/gh-profile/internal/profile"
 	"github.com/spf13/cobra"
 	"os"
 	"path/filepath"
@@ -46,7 +47,7 @@ func preRun(cmd *cobra.Command, args []string) error {
 		github.SetConfigDir(configDir)
 	}
 
-	if dir := filepath.Dir(configDir); filepath.Base(dir) == "profiles" {
+	if dir := filepath.Dir(configDir); filepath.Base(dir) == profile.ConfigDirName {
 		github.SetRootConfigDir(filepath.Dir(dir))
 	} else {
 		github.SetRootConfigDir(configDir)
