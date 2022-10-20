@@ -43,11 +43,11 @@ func (p Profile) Exists() bool {
 var ErrProfileExist = errors.New("profile already exists")
 
 func (p Profile) Create() error {
-	fmt.Println("✨ Creating profile", p.Name)
-
 	if p.Exists() {
-		return ErrProfileExist
+		return fmt.Errorf("%w: %s", ErrProfileExist, p.Name)
 	}
+
+	fmt.Println("✨ Creating profile", p.Name)
 
 	// Create profile dir
 	if err := os.MkdirAll(p.Path(), 0755); err != nil {
@@ -68,11 +68,11 @@ func (p Profile) Create() error {
 }
 
 func (p Profile) Remove() error {
-	fmt.Println("🔥 Removing profile", p.Name)
-
 	if !p.Exists() {
-		return ErrProfileNotExist
+		return fmt.Errorf("%w: %s", ErrProfileNotExist, p.Name)
 	}
+
+	fmt.Println("🔥 Removing profile", p.Name)
 
 	return os.RemoveAll(p.Path())
 }
@@ -83,7 +83,7 @@ var ErrProfileActive = errors.New("profile already active")
 
 func (p Profile) ActivateLocally(force bool) error {
 	if !p.Exists() {
-		return ErrProfileNotExist
+		return fmt.Errorf("%w: %s", ErrProfileNotExist, p.Name)
 	}
 
 	fmt.Println("🔧 Activating local dir profile", p.Name)
@@ -93,7 +93,7 @@ func (p Profile) ActivateLocally(force bool) error {
 	}
 
 	if p.IsActiveLocally() && !force {
-		return ErrProfileActive
+		return fmt.Errorf("%w: %s", ErrProfileActive, p.Name)
 	}
 
 	f, err := os.OpenFile(".envrc", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
@@ -113,13 +113,13 @@ func (p Profile) ActivateLocally(force bool) error {
 
 func (p Profile) ActivateGlobally(force bool) error {
 	if !p.Exists() {
-		return ErrProfileNotExist
+		return fmt.Errorf("%w: %s", ErrProfileNotExist, p.Name)
 	}
 
 	fmt.Println("🔧 Activating global profile", p.Name)
 
 	if p.IsActiveGlobally() && !force {
-		return ErrProfileActive
+		return fmt.Errorf("%w: %s", ErrProfileActive, p.Name)
 	}
 
 	// Remove existing hosts
@@ -185,14 +185,14 @@ func (p Profile) IsActiveLocally() bool {
 var ErrSameName = errors.New("name unchanged")
 
 func (p Profile) Rename(to string) error {
-	fmt.Println("🚚 Renaming", p.Name, "to", to)
-
 	if !p.Exists() {
-		return ErrProfileNotExist
+		return fmt.Errorf("%w: %s", ErrProfileNotExist, p.Name)
 	}
 
+	fmt.Println("🚚 Renaming", p.Name, "to", to)
+
 	if to == p.Name {
-		return ErrSameName
+		return fmt.Errorf("%w: %s to %s", ErrSameName, p.Name, to)
 	}
 
 	wasActive := p.IsActiveGlobally()
