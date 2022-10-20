@@ -36,7 +36,7 @@ func run(cmd *cobra.Command, args []string) (err error) {
 	}
 	if err != nil {
 		if errors.Is(err, profile.ErrActive) {
-			fmt.Println("⚠️ ", util.UpperFirst(err.Error()))
+			fmt.Println("ℹ️️ ", util.UpperFirst(err.Error()))
 			return nil
 		}
 		return err
