@@ -17,7 +17,7 @@ func New() *cobra.Command {
 func run(cmd *cobra.Command, args []string) (err error) {
 	profiles, err := profile.List()
 	if err != nil {
-		return err
+		return nil
 	}
 
 	for _, p := range profiles {
@@ -27,6 +27,5 @@ func run(cmd *cobra.Command, args []string) (err error) {
 		}
 	}
 
-	fmt.Println("none")
 	return nil
 }
