@@ -105,18 +105,91 @@ func TestCopyFile(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			defer func() {
-				_ = os.Remove(dstPath)
-			}()
+			defer func(path string) {
+				_ = os.Remove(path)
+			}(dstPath)
 
 			if err := CopyFile(tt.args.src, tt.args.dst); (err != nil) != tt.wantErr {
 				t.Errorf("CopyFile() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 
-			if _, err := os.Stat(dstPath); err != nil {
-				t.Errorf("dst file error: %v", err)
-				return
+			if !tt.wantErr {
+				if _, err := os.Stat(dstPath); err != nil {
+					t.Errorf("dst file error: %v", err)
+					return
+				}
+			}
+		})
+	}
+}
+
+func TestReplaceEnvsInPath(t *testing.T) {
+	// Unset envs
+	for _, env := range []string{"HOME", "XDG_CONFIG_DIR"} {
+		//goland:noinspection GoDeferInLoop
+		defer func(k, v string) {
+			// Set env back when done
+			_ = os.Setenv(k, v)
+		}(env, os.Getenv(env))
+
+		_ = os.Unsetenv(env)
+	}
+
+	type env struct {
+		key, val string
+	}
+	type args struct {
+		path string
+	}
+	tests := []struct {
+		name string
+		envs []env
+		args args
+		want string
+	}{
+		{
+			"XDG_CONFIG_DIR only",
+			[]env{{"XDG_CONFIG_DIR", "/tmp/.config"}},
+			args{"/tmp/.config/test"},
+			"$XDG_CONFIG_DIR/test",
+		},
+		{
+			"HOME only",
+			[]env{{"HOME", "/tmp"}},
+			args{"/tmp/.config/test"},
+			"$HOME/.config/test",
+		},
+		{
+			"XDG_CONFIG_DIR precedence",
+			[]env{{"HOME", "/tmp"}, {"XDG_CONFIG_DIR", "/tmp/.config"}},
+			args{"/tmp/.config/test"},
+			"$XDG_CONFIG_DIR/test",
+		},
+		{
+			"no change",
+			[]env{},
+			args{"/tmp/test"},
+			"/tmp/test",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			for _, env := range tt.envs {
+				//goland:noinspection GoDeferInLoop
+				defer func(k, v string) {
+					// Set env back when done
+					_ = os.Setenv(k, v)
+				}(env.key, os.Getenv(env.key))
+
+				// Set env to test params
+				if err := os.Setenv(env.key, env.val); err != nil {
+					t.Errorf("failed to set env %s=%s", env.key, env.val)
+				}
+			}
+
+			if got := ReplaceEnvsInPath(tt.args.path); got != tt.want {
+				t.Errorf("ReplaceEnvsInPath() = %v, want %v", got, tt.want)
 			}
 		})
 	}

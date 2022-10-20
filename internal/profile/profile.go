@@ -120,7 +120,7 @@ func (p Profile) ActivateLocally(force bool) error {
 		_ = f.Close()
 	}(f)
 
-	if _, err := f.WriteString("export GH_CONFIG_DIR='" + p.Path() + "'\n"); err != nil {
+	if _, err := f.WriteString("export GH_CONFIG_DIR=\"" + util.ReplaceEnvsInPath(p.Path()) + "\"\n"); err != nil {
 		return err
 	}
 

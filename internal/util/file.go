@@ -3,6 +3,7 @@ package util
 import (
 	"io"
 	"os"
+	"strings"
 )
 
 func IsLink(path string) (bool, error) {
@@ -40,4 +41,15 @@ func CopyFile(src, dst string) error {
 	}
 
 	return out.Close()
+}
+
+func ReplaceEnvsInPath(path string) string {
+	envs := []string{"XDG_CONFIG_DIR", "HOME"}
+	for _, env := range envs {
+		if val := os.Getenv(env); val != "" {
+			env := "$" + env
+			return strings.Replace(path, val, env, 1)
+		}
+	}
+	return path
 }
