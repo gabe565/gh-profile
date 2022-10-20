@@ -53,7 +53,7 @@ func (p Profile) Create() error {
 		return fmt.Errorf("%w: %s", ErrExist, p.Name)
 	}
 
-	fmt.Println("✨ Creating profile", p.Name)
+	fmt.Println("✨ Creating profile:", p.Name)
 
 	// Create profile dir
 	if err := os.MkdirAll(p.Path(), 0755); err != nil {
@@ -78,7 +78,7 @@ func (p Profile) Remove() error {
 		return fmt.Errorf("%w: %s", ErrNotExist, p.Name)
 	}
 
-	fmt.Println("🔥 Removing profile", p.Name)
+	fmt.Println("🔥 Removing profile:", p.Name)
 
 	return os.RemoveAll(p.Path())
 }
@@ -88,7 +88,7 @@ func (p Profile) ActivateLocally(force bool) error {
 		return fmt.Errorf("%w: %s", ErrNotExist, p.Name)
 	}
 
-	fmt.Println("🔧 Activating local dir profile", p.Name)
+	fmt.Println("🔧 Activating local dir profile:", p.Name)
 
 	if _, err := exec.LookPath("direnv"); err != nil {
 		fmt.Println("⚠️  direnv not found. To use local dir profiles, please see https://direnv.net")
@@ -118,11 +118,11 @@ func (p Profile) ActivateGlobally(force bool) error {
 		return fmt.Errorf("%w: %s", ErrNotExist, p.Name)
 	}
 
-	fmt.Println("🔧 Activating global profile", p.Name)
-
 	if p.IsActiveGlobally() && !force {
 		return fmt.Errorf("%w: %s", ErrActive, p.Name)
 	}
+
+	fmt.Println("🔧 Activating global profile:", p.Name)
 
 	// Remove existing hosts
 	if err := os.Remove(github.RootHostsPath()); err != nil && !errors.Is(err, os.ErrNotExist) {
@@ -189,11 +189,11 @@ func (p Profile) Rename(to string) error {
 		return fmt.Errorf("%w: %s", ErrNotExist, p.Name)
 	}
 
-	fmt.Println("🚚 Renaming", p.Name, "to", to)
-
 	if to == p.Name {
 		return fmt.Errorf("%w: %s to %s", ErrNameUnchanged, p.Name, to)
 	}
+
+	fmt.Println("🚚 Renaming profile:", p.Name, "to", to)
 
 	wasActive := p.IsActiveGlobally()
 
