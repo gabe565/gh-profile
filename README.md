@@ -28,7 +28,7 @@ Activates a profile.
 
 #### Params
 - `NAME` is optional. If not set, command will run interactively.
-- `--local-dir` activates the profile only for the current directory.
+- `--local-dir`/`-l` activates the profile only for the current directory.
   - For this to work, you must install a per-directory env tool like
   [direnv](https://direnv.net).
 
