@@ -1,6 +1,7 @@
 # gh-profile
 
 [![Release](https://github.com/gabe565/gh-profile/actions/workflows/release.yml/badge.svg)](https://github.com/gabe565/gh-profile/actions/workflows/release.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/gabe565/gh-profile?v=1)](https://goreportcard.com/report/github.com/gabe565/gh-profile)
 
 Work with multiple GitHub accounts using the [gh cli](https://cli.github.com/).
 
