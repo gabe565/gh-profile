@@ -83,6 +83,14 @@ func (p Profile) Create() error {
 		if err := util.CopyFile(github.RootHostsPath(), p.HostsPath()); err != nil && !errors.Is(err, os.ErrNotExist) {
 			return err
 		}
+	} else {
+		f, err := os.Create(p.HostsPath())
+		if err != nil {
+			return err
+		}
+		if err := f.Close(); err != nil {
+			return err
+		}
 	}
 
 	// Create profile config
