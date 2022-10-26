@@ -69,9 +69,20 @@ func (p Profile) Create() error {
 		return err
 	}
 
+	var first bool
+	if _, err := List(); err != nil {
+		if !errors.Is(err, ErrNoneFound) {
+			return err
+		}
+		first = true
+	}
+
 	// Create profile hosts
-	if err := util.CopyFile(github.RootHostsPath(), p.HostsPath()); err != nil && !errors.Is(err, os.ErrNotExist) {
-		return err
+	if first {
+		fmt.Println("ℹ️️  Copying existing account into profile")
+		if err := util.CopyFile(github.RootHostsPath(), p.HostsPath()); err != nil && !errors.Is(err, os.ErrNotExist) {
+			return err
+		}
 	}
 
 	// Create profile config
