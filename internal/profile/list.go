@@ -23,5 +23,9 @@ func List() ([]Profile, error) {
 		}
 	}
 
+	if len(profiles) == 0 {
+		return []Profile{}, ErrNoneFound
+	}
+
 	return profiles, nil
 }
