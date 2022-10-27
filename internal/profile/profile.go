@@ -64,17 +64,17 @@ func (p Profile) Create() error {
 
 	fmt.Println("✨ Creating profile:", p.Name)
 
-	// Create profile dir
-	if err := os.MkdirAll(p.Path(), 0755); err != nil {
-		return err
-	}
-
 	var first bool
 	if _, err := List(); err != nil {
 		if !errors.Is(err, ErrNoneFound) {
 			return err
 		}
 		first = true
+	}
+
+	// Create profile dir
+	if err := os.MkdirAll(p.Path(), 0755); err != nil {
+		return err
 	}
 
 	// Create profile hosts
