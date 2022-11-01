@@ -8,3 +8,12 @@ repos:
       - id: go-vet-mod
       - id: golangci-lint-mod
         args: [--fix]
+
+  - repo: local
+    hooks:
+      - id: usage-docs
+        name: usage-docs
+        entry: go run ./internal/cmd/docs
+        language: system
+        files: ^(cmd|internal/cmd/docs)
+        pass_filenames: false

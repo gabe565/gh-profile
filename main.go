@@ -7,8 +7,6 @@ import (
 	"os"
 )
 
-//go:generate go run ./internal/cmd/docs
-
 func main() {
 	if err := cmd.New().Execute(); err != nil {
 		fmt.Println("🚫", util.UpperFirst(err.Error()))
