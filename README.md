@@ -73,7 +73,7 @@ formatter can be easily modified to show the current profile.
 3. Find the line `local res`
 4. Add the following below that line:
     ```shell
-        local profile="$(gh profile show)"
+        local profile="$(gh profile show 2>/dev/null)"
         [[ -n "$profile" ]] && res+="$profile "
     ```
 
