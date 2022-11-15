@@ -200,6 +200,8 @@ func (p Profile) ActivateGlobally(force bool) error {
 
 	fmt.Println("🔧 Activating global profile:", p.Name)
 
+	prevProfile, _ := GetActive(GetActiveGlobal)
+
 	// Remove existing hosts
 	if err := os.Remove(github.RootHostsPath()); err != nil && !errors.Is(err, os.ErrNotExist) {
 		return err
@@ -227,6 +229,12 @@ func (p Profile) ActivateGlobally(force bool) error {
 	// Symlink profile config
 	if err := os.Symlink(p.ConfigPath(), github.RootConfigPath()); err != nil {
 		return err
+	}
+
+	if prevProfile.Name != "" {
+		if err := prevProfile.WritePrevious(); err != nil {
+			fmt.Println("⚠️  Failed to store previous profile")
+		}
 	}
 
 	return nil

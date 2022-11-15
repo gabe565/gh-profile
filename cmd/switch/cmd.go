@@ -22,7 +22,14 @@ func New() *cobra.Command {
 func run(cmd *cobra.Command, args []string) (err error) {
 	var p profile.Profile
 	if len(args) > 0 {
-		p = profile.New(args[0])
+		if args[0] == "-" {
+			p, err = profile.GetPrevious()
+			if err != nil {
+				return err
+			}
+		} else {
+			p = profile.New(args[0])
+		}
 	} else {
 		if p, err = profile.Select("Choose a profile to activate"); err != nil {
 			return err
