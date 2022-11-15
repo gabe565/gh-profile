@@ -233,13 +233,11 @@ func (p Profile) ActivateGlobally(force bool) error {
 }
 
 func (p Profile) Status() ActiveStatus {
-	if p.IsActiveLocally() {
-		return StatusLocal
+	status := ActiveStatus{
+		Global: p.IsActiveGlobally(),
+		Local:  p.IsActiveLocally(),
 	}
-	if p.IsActiveGlobally() {
-		return StatusGlobal
-	}
-	return StatusInactive
+	return status
 }
 
 func (p Profile) IsActiveGlobally() bool {

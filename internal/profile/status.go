@@ -2,22 +2,19 @@ package profile
 
 import "github.com/gabe565/gh-profile/internal/github"
 
-const (
-	StatusInactive ActiveStatus = iota
-	StatusGlobal
-	StatusLocal
-)
-
-type ActiveStatus uint8
+type ActiveStatus struct {
+	Global bool
+	Local  bool
+}
 
 func (s ActiveStatus) IsActive() bool {
 	if github.ConfigDirOverridden() {
-		return s == StatusLocal
+		return s.Local
 	} else {
-		return s == StatusGlobal
+		return s.Global
 	}
 }
 
 func (s ActiveStatus) IsAnyActive() bool {
-	return s == StatusGlobal || s == StatusLocal
+	return s != ActiveStatus{}
 }
