@@ -20,15 +20,13 @@ func New(name string) Profile {
 	}
 }
 
-var ErrExist = errors.New("profile already exists")
-
-var ErrNotExist = errors.New("profile does not exist")
-
-var ErrActive = errors.New("profile already active")
-
-var ErrNameUnchanged = errors.New("name unchanged")
-
-var ConfigDirName = "profiles"
+var (
+	ErrExist         = errors.New("profile already exists")
+	ErrNotExist      = errors.New("profile does not exist")
+	ErrActive        = errors.New("profile already active")
+	ErrNameUnchanged = errors.New("name unchanged")
+	ConfigDirName    = "profiles"
+)
 
 func ConfigDir() string {
 	return filepath.Join(github.RootConfigDir(), ConfigDirName)
