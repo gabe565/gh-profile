@@ -48,7 +48,7 @@ func GetPrevious() (Profile, error) {
 	}
 
 	for _, profile := range profiles {
-		if profile.Name == string(name) {
+		if profile.Name == name {
 			return profile, nil
 		}
 	}
