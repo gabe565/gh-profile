@@ -15,17 +15,8 @@ func New() *cobra.Command {
 }
 
 func run(cmd *cobra.Command, args []string) (err error) {
-	profiles, err := profile.List()
-	if err != nil {
-		return nil
-	}
-
-	for _, p := range profiles {
-		if p.Status().IsActive() {
-			fmt.Println(p.Name)
-			return nil
-		}
-	}
+	p, _ := profile.GetActive()
+	fmt.Println(p.Name)
 
 	return nil
 }
