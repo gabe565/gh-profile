@@ -1,0 +1,37 @@
+project_name: gh-profile
+builds:
+  - ldflags: [-s -w]
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    targets:
+      - android_arm64
+      - darwin_amd64
+      - darwin_arm64
+      - freebsd_386
+      - freebsd_amd64
+      - freebsd_arm64
+      - linux_386
+      - linux_amd64
+      - linux_arm
+      - linux_arm64
+      - windows_386
+      - windows_amd64
+      - windows_arm64
+archives:
+  - format: binary
+    name_template: "{{ .Os }}-{{ .Arch }}"
+checksum:
+  name_template: checksums.txt
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^:pencil:'
+      - '^:white_check_mark:'
+release:
+  name_template: "{{ .ProjectName }} {{ .Version }}"
+  prerelease: auto
