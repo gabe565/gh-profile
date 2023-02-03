@@ -58,7 +58,7 @@ jobs:
       - name: Set build variables
         id: vars
         run: |
-          args='release --rm-dist'
+          args='release --clean'
           if [[ "$GITHUB_REF" != refs/tags/* ]]; then
             args+=' --snapshot'
           fi
