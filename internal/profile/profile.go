@@ -5,13 +5,14 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/gabe565/gh-profile/internal/github"
-	"github.com/gabe565/gh-profile/internal/util"
 	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
+
+	"github.com/gabe565/gh-profile/internal/github"
+	"github.com/gabe565/gh-profile/internal/util"
 )
 
 func New(name string) Profile {
@@ -234,6 +235,8 @@ func (p Profile) ActivateGlobally(force bool) error {
 			fmt.Println("⚠️  Failed to store previous profile")
 		}
 	}
+
+	exec.Command("gh", "auth", "setup-git")
 
 	return nil
 }
