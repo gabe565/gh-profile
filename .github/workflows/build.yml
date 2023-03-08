@@ -69,7 +69,7 @@ jobs:
           version: latest
           args: ${{ steps.vars.outputs.args }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
       - uses: actions/upload-artifact@v3
         with:
           name: dist
