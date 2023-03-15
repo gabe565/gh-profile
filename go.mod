@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.6
-	github.com/jedib0t/go-pretty/v6 v6.4.5
+	github.com/jedib0t/go-pretty/v6 v6.4.6
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/viper v1.15.0
 )
