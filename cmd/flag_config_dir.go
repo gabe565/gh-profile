@@ -7,8 +7,10 @@ import (
 	"github.com/spf13/viper"
 )
 
+var DefaultConfigDir = ghcliconfig.ConfigDir()
+
 func flagConfigDir(cmd *cobra.Command) {
-	cmd.PersistentFlags().StringP(github.ConfigDirKey, "c", ghcliconfig.ConfigDir(), "GitHub CLI config dir")
+	cmd.PersistentFlags().StringP(github.ConfigDirKey, "c", DefaultConfigDir, "GitHub CLI config dir")
 	if err := viper.BindPFlag(github.ConfigDirKey, cmd.PersistentFlags().Lookup(github.ConfigDirKey)); err != nil {
 		panic(err)
 	}

@@ -19,6 +19,8 @@ func main() {
 		log.Fatal(fmt.Errorf("failed to mkdir: %w", err))
 	}
 
+	cmd.DefaultConfigDir = "$HOME/.config/gh"
+
 	rootCmd := cmd.New()
 	if err := doc.GenMarkdownTree(rootCmd, output); err != nil {
 		log.Fatal(fmt.Errorf("failed to generate markdown: %w", err))
