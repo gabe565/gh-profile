@@ -126,7 +126,7 @@ func TestCopyFile(t *testing.T) {
 
 func TestReplaceEnvsInPath(t *testing.T) {
 	// Unset envs
-	for _, env := range []string{"HOME", "XDG_CONFIG_DIR"} {
+	for _, env := range []string{"HOME", "XDG_CONFIG_DIR", "AppData"} {
 		//goland:noinspection GoDeferInLoop
 		defer func(k, v string) {
 			// Set env back when done
@@ -161,8 +161,14 @@ func TestReplaceEnvsInPath(t *testing.T) {
 			"$HOME/.config/test",
 		},
 		{
+			"AppData only",
+			[]env{{"AppData", "/tmp"}},
+			args{"/tmp/.config/test"},
+			"$AppData/.config/test",
+		},
+		{
 			"XDG_CONFIG_DIR precedence",
-			[]env{{"HOME", "/tmp"}, {"XDG_CONFIG_DIR", "/tmp/.config"}},
+			[]env{{"HOME", "/tmp"}, {"XDG_CONFIG_DIR", "/tmp/.config"}, {"AppData", "/tmp"}},
 			args{"/tmp/.config/test"},
 			"$XDG_CONFIG_DIR/test",
 		},
