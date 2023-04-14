@@ -44,7 +44,7 @@ func CopyFile(src, dst string) error {
 }
 
 func ReplaceEnvsInPath(path string) string {
-	envs := []string{"XDG_CONFIG_DIR", "HOME"}
+	envs := []string{"XDG_CONFIG_DIR", "HOME", "AppData"}
 	for _, env := range envs {
 		if val := os.Getenv(env); val != "" {
 			env := "$" + env
