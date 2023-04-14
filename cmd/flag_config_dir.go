@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"path/filepath"
-
 	ghcliconfig "github.com/cli/go-gh/pkg/config"
 	"github.com/gabe565/gh-profile/internal/github"
 	"github.com/spf13/cobra"
@@ -10,11 +8,7 @@ import (
 )
 
 func flagConfigDir(cmd *cobra.Command) {
-	defaultDir := ghcliconfig.ConfigDir()
-	if defaultDir == "" {
-			defaultDir = filepath.Join("$HOME", ".config", "gh")
-	}
-	cmd.PersistentFlags().StringP(github.ConfigDirKey, "c", defaultDir, "GitHub CLI config dir")
+	cmd.PersistentFlags().StringP(github.ConfigDirKey, "c", ghcliconfig.ConfigDir(), "GitHub CLI config dir")
 	if err := viper.BindPFlag(github.ConfigDirKey, cmd.PersistentFlags().Lookup(github.ConfigDirKey)); err != nil {
 		panic(err)
 	}
