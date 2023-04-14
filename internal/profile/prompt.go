@@ -2,6 +2,7 @@ package profile
 
 import (
 	"errors"
+
 	"github.com/AlecAivazis/survey/v2"
 )
 

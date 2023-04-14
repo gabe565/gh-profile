@@ -3,6 +3,7 @@ package _switch
 import (
 	"errors"
 	"fmt"
+
 	"github.com/gabe565/gh-profile/internal/profile"
 	"github.com/gabe565/gh-profile/internal/util"
 	"github.com/spf13/cobra"

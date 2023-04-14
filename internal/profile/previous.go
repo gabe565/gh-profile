@@ -4,9 +4,10 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/gabe565/gh-profile/internal/github"
 	"os"
 	"path/filepath"
+
+	"github.com/gabe565/gh-profile/internal/github"
 )
 
 func (p Profile) WritePrevious() error {

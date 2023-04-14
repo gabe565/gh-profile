@@ -2,6 +2,7 @@ package profile
 
 import (
 	"errors"
+
 	"github.com/gabe565/gh-profile/internal/github"
 )
 

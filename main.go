@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/gabe565/gh-profile/cmd"
 	"github.com/gabe565/gh-profile/internal/util"
-	"os"
 )
 
 func main() {

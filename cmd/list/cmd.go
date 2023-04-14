@@ -2,6 +2,7 @@ package list
 
 import (
 	"fmt"
+
 	"github.com/gabe565/gh-profile/internal/profile"
 	"github.com/jedib0t/go-pretty/v6/text"
 	"github.com/spf13/cobra"

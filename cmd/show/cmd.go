@@ -2,6 +2,7 @@ package show
 
 import (
 	"fmt"
+
 	"github.com/gabe565/gh-profile/internal/profile"
 	"github.com/spf13/cobra"
 )

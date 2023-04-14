@@ -5,13 +5,14 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/gabe565/gh-profile/internal/github"
-	"github.com/gabe565/gh-profile/internal/util"
 	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
+
+	"github.com/gabe565/gh-profile/internal/github"
+	"github.com/gabe565/gh-profile/internal/util"
 )
 
 func New(name string) Profile {
@@ -71,7 +72,7 @@ func (p Profile) Create() error {
 	}
 
 	// Create profile dir
-	if err := os.MkdirAll(p.Path(), 0755); err != nil {
+	if err := os.MkdirAll(p.Path(), 0o755); err != nil {
 		return err
 	}
 
@@ -133,7 +134,7 @@ func (p Profile) ActivateLocally(force bool) error {
 		}
 	}
 
-	f, err := os.OpenFile(".envrc", os.O_CREATE|os.O_RDWR, 0666)
+	f, err := os.OpenFile(".envrc", os.O_CREATE|os.O_RDWR, 0o666)
 	if err != nil {
 		return err
 	}

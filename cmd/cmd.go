@@ -1,6 +1,10 @@
 package cmd
 
 import (
+	"os"
+	"path/filepath"
+	"strings"
+
 	"github.com/gabe565/gh-profile/cmd/create"
 	"github.com/gabe565/gh-profile/cmd/list"
 	"github.com/gabe565/gh-profile/cmd/remove"
@@ -10,9 +14,6 @@ import (
 	"github.com/gabe565/gh-profile/internal/github"
 	"github.com/gabe565/gh-profile/internal/profile"
 	"github.com/spf13/cobra"
-	"os"
-	"path/filepath"
-	"strings"
 )
 
 func New() *cobra.Command {
