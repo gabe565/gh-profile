@@ -1,8 +1,7 @@
 package main
 
 import (
-	"fmt"
-	"os"
+	"log"
 
 	"github.com/gabe565/gh-profile/cmd"
 	"github.com/gabe565/gh-profile/internal/util"
@@ -14,8 +13,9 @@ var (
 )
 
 func main() {
-	if err := cmd.New(version, commit).Execute(); err != nil {
-		fmt.Println("🚫", util.UpperFirst(err.Error()))
-		os.Exit(1)
+	rootCmd := cmd.New(version, commit)
+	if err := rootCmd.Execute(); err != nil {
+		l := log.New(rootCmd.ErrOrStderr(), "", 0)
+		l.Fatalln("🚫", util.UpperFirst(err.Error()))
 	}
 }
