@@ -20,8 +20,11 @@ func New() *cobra.Command {
 }
 
 func run(cmd *cobra.Command, args []string) (err error) {
-	p, _ := profile.GetActive()
-	fmt.Println(p.Name)
+	p, err := profile.GetActive()
+	if err != nil {
+		return err
+	}
 
+	fmt.Println(p.Name)
 	return nil
 }
