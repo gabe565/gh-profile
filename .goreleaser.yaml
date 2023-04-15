@@ -1,7 +1,6 @@
 project_name: gh-profile
 builds:
-  - ldflags: [-s -w]
-    env:
+  - env:
       - CGO_ENABLED=0
     flags:
       - -trimpath

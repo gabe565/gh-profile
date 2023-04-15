@@ -16,13 +16,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func New() *cobra.Command {
+func New(version, commit string) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:               "profile",
 		Short:             "Work with multiple GitHub accounts using the gh cli",
 		PersistentPreRunE: preRun,
 		DisableAutoGenTag: true,
 		SilenceErrors:     true,
+		Version:           buildVersion(version, commit),
 	}
 	cmd.AddCommand(
 		create.New(),
@@ -56,4 +57,11 @@ func preRun(cmd *cobra.Command, args []string) error {
 
 	cmd.SilenceUsage = true
 	return nil
+}
+
+func buildVersion(version, commit string) string {
+	if commit != "" {
+		version += " (" + commit + ")"
+	}
+	return version
 }

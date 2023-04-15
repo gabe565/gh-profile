@@ -7,6 +7,7 @@ Work with multiple GitHub accounts using the gh cli
 ```
   -c, --config-dir string   GitHub CLI config dir (default "$HOME/.config/gh")
   -h, --help                help for profile
+  -v, --version             version for profile
 ```
 
 ### SEE ALSO

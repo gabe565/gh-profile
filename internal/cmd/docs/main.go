@@ -22,7 +22,9 @@ func main() {
 
 	cmd.DefaultConfigDir = "$HOME/.config/gh"
 
-	rootCmd := cmd.New()
+	rootCmd := cmd.New("latest", "")
+	rootCmd.InitDefaultVersionFlag()
+
 	if err := doc.GenMarkdownTree(rootCmd, output); err != nil {
 		log.Fatal(fmt.Errorf("failed to generate markdown: %w", err))
 	}
