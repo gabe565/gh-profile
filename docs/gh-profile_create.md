@@ -1,9 +1,9 @@
-## profile create
+## gh-profile create
 
 Creates a new profile
 
 ```
-profile create [NAME] [flags]
+gh-profile create [NAME] [flags]
 ```
 
 ### Options
@@ -20,5 +20,5 @@ profile create [NAME] [flags]
 
 ### SEE ALSO
 
-* [profile](profile.md)	 - Work with multiple GitHub accounts using the gh cli
+* [gh-profile](gh-profile.md)	 - Work with multiple GitHub accounts using the gh cli
 

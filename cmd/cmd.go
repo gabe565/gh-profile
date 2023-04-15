@@ -18,7 +18,7 @@ import (
 
 func New(version, commit string) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:               "profile",
+		Use:               "gh-profile",
 		Short:             "Work with multiple GitHub accounts using the gh cli",
 		PersistentPreRunE: preRun,
 		DisableAutoGenTag: true,

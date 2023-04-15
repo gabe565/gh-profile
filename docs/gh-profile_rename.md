@@ -1,9 +1,9 @@
-## profile rename
+## gh-profile rename
 
 Renames a profile
 
 ```
-profile rename [NAME] [NEW_NAME] [flags]
+gh-profile rename [NAME] [NEW_NAME] [flags]
 ```
 
 ### Options
@@ -20,5 +20,5 @@ profile rename [NAME] [NEW_NAME] [flags]
 
 ### SEE ALSO
 
-* [profile](profile.md)	 - Work with multiple GitHub accounts using the gh cli
+* [gh-profile](gh-profile.md)	 - Work with multiple GitHub accounts using the gh cli
 

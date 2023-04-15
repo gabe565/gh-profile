@@ -1,9 +1,9 @@
-## profile remove
+## gh-profile remove
 
 Deletes a profile
 
 ```
-profile remove [NAME] [flags]
+gh-profile remove [NAME] [flags]
 ```
 
 ### Options
@@ -20,5 +20,5 @@ profile remove [NAME] [flags]
 
 ### SEE ALSO
 
-* [profile](profile.md)	 - Work with multiple GitHub accounts using the gh cli
+* [gh-profile](gh-profile.md)	 - Work with multiple GitHub accounts using the gh cli
 

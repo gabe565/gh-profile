@@ -15,7 +15,7 @@ gh extension install gabe565/gh-profile
 
 ## Usage
 
-See the [generated usage docs](./docs/profile.md), or see a summary of each
+See the [generated usage docs](./docs/gh-profile.md), or see a summary of each
 subcommand below.
 
 > **Note**

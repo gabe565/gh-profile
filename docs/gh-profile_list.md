@@ -1,15 +1,15 @@
-## profile show
+## gh-profile list
 
-Shows the active profile name
+Lists all profiles
 
 ```
-profile show [flags]
+gh-profile list [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for show
+  -h, --help   help for list
 ```
 
 ### Options inherited from parent commands
@@ -20,5 +20,5 @@ profile show [flags]
 
 ### SEE ALSO
 
-* [profile](profile.md)	 - Work with multiple GitHub accounts using the gh cli
+* [gh-profile](gh-profile.md)	 - Work with multiple GitHub accounts using the gh cli
 

@@ -1,9 +1,9 @@
-## profile switch
+## gh-profile switch
 
 Switch active profile
 
 ```
-profile switch [NAME] [flags]
+gh-profile switch [NAME] [flags]
 ```
 
 ### Options
@@ -21,5 +21,5 @@ profile switch [NAME] [flags]
 
 ### SEE ALSO
 
-* [profile](profile.md)	 - Work with multiple GitHub accounts using the gh cli
+* [gh-profile](gh-profile.md)	 - Work with multiple GitHub accounts using the gh cli
 
