@@ -2,6 +2,7 @@ package create
 
 import (
 	"github.com/gabe565/gh-profile/internal/profile"
+	"github.com/gabe565/gh-profile/internal/util"
 	"github.com/spf13/cobra"
 )
 
@@ -11,6 +12,8 @@ func New() *cobra.Command {
 		Aliases: []string{"c", "new", "add"},
 		Short:   "Creates a new profile",
 		RunE:    run,
+
+		ValidArgsFunction: util.ShellCompDisable,
 	}
 }
 

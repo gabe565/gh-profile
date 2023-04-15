@@ -15,6 +15,12 @@ func New() *cobra.Command {
 		Aliases: []string{"activate", "active", "sw", "s"},
 		Short:   "Switch active profile",
 		RunE:    run,
+
+		ValidArgsFunction: func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+			names, directive := profile.ShellCompName(cmd, args, toComplete)
+			names = append(names, "-")
+			return names, directive
+		},
 	}
 	flagLocalDir(cmd)
 	return cmd

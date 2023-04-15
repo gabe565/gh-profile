@@ -13,6 +13,8 @@ func New() *cobra.Command {
 		Aliases: []string{"delete", "rm", "d"},
 		Short:   "Deletes a profile",
 		RunE:    run,
+
+		ValidArgsFunction: profile.ShellCompName,
 	}
 }
 

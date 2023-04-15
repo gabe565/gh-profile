@@ -11,6 +11,8 @@ func New() *cobra.Command {
 		Aliases: []string{"mv"},
 		Short:   "Renames a profile",
 		RunE:    run,
+
+		ValidArgsFunction: profile.ShellCompName,
 	}
 }
 

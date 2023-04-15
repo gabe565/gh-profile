@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gabe565/gh-profile/internal/profile"
+	"github.com/gabe565/gh-profile/internal/util"
 	"github.com/jedib0t/go-pretty/v6/text"
 	"github.com/spf13/cobra"
 )
@@ -14,6 +15,8 @@ func New() *cobra.Command {
 		Aliases: []string{"ls", "l"},
 		Short:   "Lists all profiles",
 		RunE:    run,
+
+		ValidArgsFunction: util.ShellCompDisable,
 	}
 }
 

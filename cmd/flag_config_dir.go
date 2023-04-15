@@ -14,4 +14,12 @@ func flagConfigDir(cmd *cobra.Command) {
 	if err := viper.BindPFlag(github.ConfigDirKey, cmd.PersistentFlags().Lookup(github.ConfigDirKey)); err != nil {
 		panic(err)
 	}
+	if err := cmd.RegisterFlagCompletionFunc(
+		github.ConfigDirKey,
+		func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+			return nil, cobra.ShellCompDirectiveFilterDirs
+		},
+	); err != nil {
+		panic(err)
+	}
 }
