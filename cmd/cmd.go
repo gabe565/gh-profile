@@ -25,6 +25,16 @@ func New(version, commit string) *cobra.Command {
 		SilenceErrors:     true,
 		Version:           buildVersion(version, commit),
 	}
+	cmd.AddGroup(
+		&cobra.Group{
+			ID:    "write",
+			Title: "Write Commands:",
+		},
+		&cobra.Group{
+			ID:    "read",
+			Title: "Read Commands:",
+		},
+	)
 	cmd.AddCommand(
 		create.New(),
 		remove.New(),

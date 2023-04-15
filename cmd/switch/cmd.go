@@ -14,6 +14,7 @@ func New() *cobra.Command {
 		Use:     "switch [NAME]",
 		Aliases: []string{"activate", "active", "sw", "s"},
 		Short:   "Switch active profile",
+		GroupID: "write",
 		RunE:    run,
 
 		ValidArgsFunction: func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {

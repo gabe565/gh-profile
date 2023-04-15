@@ -10,6 +10,7 @@ func New() *cobra.Command {
 		Use:     "rename [NAME] [NEW_NAME]",
 		Aliases: []string{"mv"},
 		Short:   "Renames a profile",
+		GroupID: "write",
 		RunE:    run,
 
 		ValidArgsFunction: profile.ShellCompName,

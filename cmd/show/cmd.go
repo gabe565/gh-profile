@@ -10,9 +10,10 @@ import (
 
 func New() *cobra.Command {
 	return &cobra.Command{
-		Use:   "show",
-		Short: "Shows the active profile name",
-		RunE:  run,
+		Use:     "show",
+		Short:   "Shows the active profile name",
+		GroupID: "read",
+		RunE:    run,
 
 		ValidArgsFunction: util.ShellCompDisable,
 	}

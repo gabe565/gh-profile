@@ -11,6 +11,7 @@ func New() *cobra.Command {
 		Use:     "create [NAME]",
 		Aliases: []string{"c", "new", "add"},
 		Short:   "Creates a new profile",
+		GroupID: "write",
 		RunE:    run,
 
 		ValidArgsFunction: util.ShellCompDisable,

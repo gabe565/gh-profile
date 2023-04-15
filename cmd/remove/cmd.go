@@ -12,6 +12,7 @@ func New() *cobra.Command {
 		Use:     "remove [NAME]",
 		Aliases: []string{"delete", "rm", "d"},
 		Short:   "Deletes a profile",
+		GroupID: "write",
 		RunE:    run,
 
 		ValidArgsFunction: profile.ShellCompName,

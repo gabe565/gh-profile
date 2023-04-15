@@ -14,6 +14,7 @@ func New() *cobra.Command {
 		Use:     "list",
 		Aliases: []string{"ls", "l"},
 		Short:   "Lists all profiles",
+		GroupID: "read",
 		RunE:    run,
 
 		ValidArgsFunction: util.ShellCompDisable,
