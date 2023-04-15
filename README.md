@@ -5,6 +5,8 @@
 
 Work with multiple GitHub accounts using the [gh cli](https://cli.github.com/).
 
+<img alt="gh-profile demo" src="../demo/demo.gif" width="640">
+
 ## Installation
 
 ```shell
