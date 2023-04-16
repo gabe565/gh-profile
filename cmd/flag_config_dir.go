@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	ghcliconfig "github.com/cli/go-gh/pkg/config"
+	ghcliconfig "github.com/cli/go-gh/v2/pkg/config"
 	"github.com/gabe565/gh-profile/internal/github"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
