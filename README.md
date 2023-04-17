@@ -28,6 +28,13 @@ subcommand below.
 
   **Params**
   - `NAME` is optional. If not set, command will run interactively.
+
+  **Example**
+  ```shell
+  $ gh profile create example
+  ✨ Creating profile: example
+  🔧 Activating global profile: example
+  ```
   </details>
 - **`gh profile switch [NAME] [--local-dir]`:** Activates a profile.
   <details>
@@ -38,6 +45,12 @@ subcommand below.
     - If set to `-`, gh-profile will switch back to the previous profile.
   - `--local-dir`/`-l` activates the profile only for the current directory.
     - For this to work, you must install a per-directory env tool like [direnv](https://direnv.net).
+
+  **Example**
+  ```shell
+  $ gh profile switch example
+  🔧 Activating global profile: example
+  ```
   </details>
 - **`gh profile rename [NAME] [NEW_NAME]`:** Renames a profile.
   <details>
@@ -45,17 +58,49 @@ subcommand below.
 
   **Params**
   - `NAME` and `NEW_NAME` are optional. If not set, command will run interactively.
+
+  **Example**
+  ```shell
+  $ gh profile rename example example2
+  🚚 Renaming profile: example to example2
+  🔧 Activating global profile: example2
+  ```
   </details>
 - **`gh profile list`:** Lists all profiles. Active profile will be bold with a green check.
+  <details>
+    <summary>Details</summary>
+
+  **Example**
+  ```shell
+  $ gh profile list
+  ✓ example
+    gabe565
+  ```
+  </details>
 - **`gh profile remove [NAME]`:** Removes a profile.
   <details>
     <summary>Details</summary>
 
   **Params**
   - `NAME` is optional. If not set, command will run interactively.
+
+  **Example**
+  ```shell
+  $ gh profile remove example2
+  🔥 Removing profile: example2
+  ```
   </details>
 
 - **`gh profile show`:** Prints the active profile name. If no profile is active, nothing will be printed. Useful as a [prompt element](#prompt-element).
+  <details>
+    <summary>Details</summary>
+
+  **Example**:
+  ```shell
+  $ gh profile show
+  example
+  ```
+  </details>
 
 ## Prompt Element
 
