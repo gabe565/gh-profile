@@ -22,46 +22,40 @@ subcommand below.
 > As of v2.26.0, the gh cli now uses secure auth tokens by default.
 > Secure auth tokens are not yet supported by gh-profile, so when logging into GitHub, make sure to run `gh auth login --insecure-storage`.
 
+- **`gh profile create [NAME]`:** Creates a new profile.
+  <details>
+    <summary>Details</summary>
 
-### `gh profile create [NAME]`
-Creates a new profile.
+  **Params**
+  - `NAME` is optional. If not set, command will run interactively.
+  </details>
+- **`gh profile switch [NAME] [--local-dir]`:** Activates a profile.
+  <details>
+    <summary>Details</summary>
 
-#### Params
-- `NAME` is optional. If not set, command will run interactively.
+  **Params**
+  - `NAME` is optional. If not set, command will run interactively.
+    - If set to `-`, gh-profile will switch back to the previous profile.
+  - `--local-dir`/`-l` activates the profile only for the current directory.
+    - For this to work, you must install a per-directory env tool like [direnv](https://direnv.net).
+  </details>
+- **`gh profile rename [NAME] [NEW_NAME]`:** Renames a profile.
+  <details>
+    <summary>Details</summary>
 
+  **Params**
+  - `NAME` and `NEW_NAME` are optional. If not set, command will run interactively.
+  </details>
+- **`gh profile list`:** Lists all profiles. Active profile will be bold with a green check.
+- **`gh profile remove [NAME]`:** Removes a profile.
+  <details>
+    <summary>Details</summary>
 
-### `gh profile switch [NAME] [--local-dir]`
-Activates a profile.
+  **Params**
+  - `NAME` is optional. If not set, command will run interactively.
+  </details>
 
-#### Params
-- `NAME` is optional. If not set, command will run interactively.
-  - If set to `-`, gh-profile will switch back to the previous profile.
-- `--local-dir`/`-l` activates the profile only for the current directory.
-  - For this to work, you must install a per-directory env tool like
-  [direnv](https://direnv.net).
-
-
-### `gh profile rename [NAME] [NEW_NAME]`
-Renames a profile.
-
-#### Params
-- `NAME` and `NEW_NAME` are optional. If not set, command will run interactively.
-
-
-### `gh profile list`
-Lists all profiles. Active profile will be bold with a green check.  
-
-
-### `gh profile remove [NAME]`
-Removes a profile.
-
-#### Params
-- `NAME` is optional. If not set, command will run interactively.
-
-
-### `gh profile show`
-Prints the active profile name. If no profile is active, nothing will be
-printed. Useful as a [prompt element](#prompt-element).
+- **`gh profile show`:** Prints the active profile name. If no profile is active, nothing will be printed. Useful as a [prompt element](#prompt-element).
 
 ## Prompt Element
 
