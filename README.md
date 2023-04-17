@@ -20,7 +20,8 @@ subcommand below.
 
 > **Note**
 > As of v2.26.0, the gh cli now uses secure auth tokens by default.
-> Secure auth tokens are not yet supported by gh-profile, so when logging into GitHub, make sure to run `gh auth login --insecure-storage`.
+> Secure auth tokens are not yet supported by gh-profile, so when logging into GitHub, make sure to run:  
+> `gh auth login --insecure-storage`
 
 - **`gh profile create [NAME]`:** Creates a new profile.
   <details>
