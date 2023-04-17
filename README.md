@@ -26,10 +26,10 @@ subcommand below.
   <details>
     <summary>Details</summary>
 
-  **Params**
+  **Params:**
   - `NAME` is optional. If not set, command will run interactively.
 
-  **Example**
+  **Example:**
   ```shell
   $ gh profile create example
   ✨ Creating profile: example
@@ -40,13 +40,13 @@ subcommand below.
   <details>
     <summary>Details</summary>
 
-  **Params**
+  **Params:**
   - `NAME` is optional. If not set, command will run interactively.
     - If set to `-`, gh-profile will switch back to the previous profile.
   - `--local-dir`/`-l` activates the profile only for the current directory.
     - For this to work, you must install a per-directory env tool like [direnv](https://direnv.net).
 
-  **Example**
+  **Example:**
   ```shell
   $ gh profile switch example
   🔧 Activating global profile: example
@@ -56,10 +56,10 @@ subcommand below.
   <details>
     <summary>Details</summary>
 
-  **Params**
+  **Params:**
   - `NAME` and `NEW_NAME` are optional. If not set, command will run interactively.
 
-  **Example**
+  **Example:**
   ```shell
   $ gh profile rename example example2
   🚚 Renaming profile: example to example2
@@ -70,7 +70,7 @@ subcommand below.
   <details>
     <summary>Details</summary>
 
-  **Example**
+  **Example:**
   ```shell
   $ gh profile list
   ✓ example
@@ -81,10 +81,10 @@ subcommand below.
   <details>
     <summary>Details</summary>
 
-  **Params**
+  **Params:**
   - `NAME` is optional. If not set, command will run interactively.
 
-  **Example**
+  **Example:**
   ```shell
   $ gh profile remove example2
   🔥 Removing profile: example2
