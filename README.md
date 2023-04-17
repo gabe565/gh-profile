@@ -26,6 +26,8 @@ subcommand below.
   <details>
     <summary>Details</summary>
 
+  **Aliases:** `c`, `new`, `add`
+
   **Params:**
   - `NAME` is optional. If not set, command will run interactively.
 
@@ -39,6 +41,8 @@ subcommand below.
 - **`gh profile switch [NAME] [--local-dir]`:** Activates a profile.
   <details>
     <summary>Details</summary>
+
+  **Aliases:** `activate`, `active`, `sw`, `s`
 
   **Params:**
   - `NAME` is optional. If not set, command will run interactively.
@@ -56,6 +60,8 @@ subcommand below.
   <details>
     <summary>Details</summary>
 
+  **Aliases:** `mv`
+
   **Params:**
   - `NAME` and `NEW_NAME` are optional. If not set, command will run interactively.
 
@@ -70,6 +76,8 @@ subcommand below.
   <details>
     <summary>Details</summary>
 
+  **Aliases:** `ls`, `l`
+
   **Example:**
   ```shell
   $ gh profile list
@@ -80,6 +88,8 @@ subcommand below.
 - **`gh profile remove [NAME]`:** Removes a profile.
   <details>
     <summary>Details</summary>
+
+  **Aliases:** `delete`, `rm`, `d`
 
   **Params:**
   - `NAME` is optional. If not set, command will run interactively.
