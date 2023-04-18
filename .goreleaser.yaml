@@ -32,5 +32,4 @@ changelog:
       - '^:pencil:'
       - '^:white_check_mark:'
 release:
-  name_template: "{{ .Version }}"
   prerelease: auto
