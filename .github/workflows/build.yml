@@ -66,7 +66,7 @@ jobs:
           args: ${{ steps.vars.outputs.args }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist
