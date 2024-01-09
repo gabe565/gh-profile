@@ -1,6 +1,6 @@
 module github.com/gabe565/gh-profile
 
-go 1.20
+go 1.21.6
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.6
