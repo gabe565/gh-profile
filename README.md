@@ -5,6 +5,9 @@
 
 Work with multiple GitHub accounts using the [gh cli](https://cli.github.com/).
 
+> [!IMPORTANT]
+> Official multi-account support was added to the `gh` cli in [v2.40.0](https://github.com/cli/cli/releases/tag/v2.40.0). This repository will no longer be maintained, and it is suggested to use the official multi-account implementation. See GitHub's multi-account docs [here](https://github.com/cli/cli/blob/trunk/docs/multiple-accounts.md).
+
 <img alt="gh-profile demo" src="../demo/demo.gif" width="640">
 
 ## Installation
